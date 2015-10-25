@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TimerListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,13 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // セルの選択状態を解除する
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
     }
 
 
