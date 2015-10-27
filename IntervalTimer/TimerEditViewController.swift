@@ -95,9 +95,8 @@ class TimerEditViewController: UITableViewController {
     
     func fromDatePicker() {
         fromPickerHidden = !fromPickerHidden
-        if (!toPickerHidden) {
-            toPickerHidden = !toPickerHidden
-        }
+        toPickerHidden = true
+        notifyTimePickerHidden = true
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -105,9 +104,8 @@ class TimerEditViewController: UITableViewController {
     
     func toDatePicker() {
         toPickerHidden = !toPickerHidden
-        if (!fromPickerHidden) {
-            fromPickerHidden = !fromPickerHidden
-        }
+        fromPickerHidden = true
+        notifyTimePickerHidden = true
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -115,6 +113,9 @@ class TimerEditViewController: UITableViewController {
     
     func notifyDatePicker() {
         notifyTimePickerHidden = !notifyTimePickerHidden
+        toPickerHidden = true
+        fromPickerHidden = true
+        
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -155,7 +156,7 @@ class TimerEditViewController: UITableViewController {
     }
     
     @IBAction func save(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Hello!", message: "This is Alert sample.", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "保存完了", message: "タイマーの保存が完了しました。", preferredStyle: .Alert)
         
         let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(defaultAction)
@@ -172,12 +173,19 @@ class TimerEditViewController: UITableViewController {
         
         let timerEntity: NSEntityDescription! = NSEntityDescription.entityForName("TimerEntity", inManagedObjectContext: timerContext)
         
-        let newData = TimerEntity(entity: timerEntity!, insertIntoManagedObjectContext: timerContext)
-        newData.title = titleField.text
+        let newData = IntervalTimer.TimerEntity(entity: timerEntity!, insertIntoManagedObjectContext: timerContext)
+        newData.title = titleField.text!.isEmpty ? "New Timer" : titleField.text
         newData.from = fromPicker.date
         newData.to = toPicker.date
         newData.notify = notifyTimePicker.date
         newData.repeats = repeatsSwitch.on
+        
+        do {
+            try timerContext.save()
+        } catch let error as NSError {
+            print(error)
+        }
+        
     }
 
     // MARK: - Table view data source
