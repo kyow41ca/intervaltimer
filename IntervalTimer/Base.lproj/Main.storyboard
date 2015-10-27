@@ -140,7 +140,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9Sq-5A-Htz">
                             <connections>
-                                <segue destination="hXG-Im-kpT" kind="push" id="IPr-AK-71Q"/>
+                                <segue destination="iet-R2-gp4" kind="modal" id="EAV-qJ-vdj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -616,6 +616,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="タイマー追加" id="031-2O-OoQ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="iXf-l0-VOa">
+                            <connections>
+                                <action selector="closeModalDialog:" destination="hXG-Im-kpT" id="4rr-ui-CQh"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="9EG-kx-agX">
                             <connections>
                                 <action selector="save:" destination="hXG-Im-kpT" id="s17-za-0Fh"/>
@@ -637,7 +642,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Saw-8v-bEN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1756.5" y="324.75"/>
+            <point key="canvasLocation" x="2448" y="324.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BBf-Gm-kKs">
@@ -657,6 +662,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HFy-wL-TVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="349.5" y="324.75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gw7-UD-Ogw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iet-R2-gp4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UJ5-UF-F2U">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hXG-Im-kpT" kind="relationship" relationship="rootViewController" id="rGs-iN-f6g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VLR-o5-rcu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1756.5" y="324.75"/>
         </scene>
     </scenes>
 </document>

@@ -45,8 +45,6 @@ class TimerListViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
         
-        // TableViewを再読み込み.
-        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,6 +107,13 @@ class TimerListViewController: UITableViewController {
         //lbl5.text = dateString(String("\(from.timeIntervalSinceDate(to))"), format: "yyyy/MM/dd")
         
         return cell
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if editing {
+            super.setEditing(false, animated: true)
+            tableView.setEditing(false, animated: true)
+        }
     }
     
     private func dateString(date: NSDate, format: String) -> String {

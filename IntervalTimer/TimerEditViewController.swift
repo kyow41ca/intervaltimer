@@ -59,6 +59,14 @@ class TimerEditViewController: UITableViewController {
         return true
     }
     
+    @IBAction func closeModalDialog(sender: UIBarButtonItem) {
+        closeModalDialog()
+    }
+    
+    func closeModalDialog() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if (indexPath.section == 0 && indexPath.row == 1) {
@@ -156,14 +164,20 @@ class TimerEditViewController: UITableViewController {
     }
     
     @IBAction func save(sender: AnyObject) {
-        let alertController = UIAlertController(title: "保存完了", message: "タイマーの保存が完了しました。", preferredStyle: .Alert)
-        
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alertController.addAction(defaultAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
         
         saveData()
+        
+        let alertController = UIAlertController(title: "保存完了", message: "タイマーの保存が完了しました。", preferredStyle: .Alert)
+        
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .Default,
+                handler: { action in
+                    self.closeModalDialog()
+            }))
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func saveData() {
