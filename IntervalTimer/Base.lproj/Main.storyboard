@@ -17,10 +17,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="165" id="izh-ut-w9j" userLabel="Cell">
-                                <rect key="frame" x="0.0" y="92" width="600" height="123"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="165"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="izh-ut-w9j" id="ZwW-J3-1WQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="122"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="164"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2000/01/01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z70-tK-FRV">
@@ -82,20 +82,20 @@
                                             <exclude reference="wtb-K5-5e4"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="4O1-bP-GaE"/>
-                                            <exclude reference="5Mz-Hh-af1"/>
-                                            <exclude reference="YiF-44-pzO"/>
-                                            <exclude reference="1Vs-A6-gab"/>
-                                            <exclude reference="Ds4-pp-tdU"/>
                                             <exclude reference="4IX-9g-Nvt"/>
                                             <exclude reference="Waw-85-5bw"/>
                                             <exclude reference="bT3-ZJ-BMC"/>
                                             <exclude reference="ebV-Vq-3eY"/>
                                             <exclude reference="rvW-TV-mN2"/>
-                                            <exclude reference="4wG-FS-kZB"/>
-                                            <exclude reference="p94-wR-awb"/>
+                                            <exclude reference="1Vs-A6-gab"/>
+                                            <exclude reference="Ds4-pp-tdU"/>
                                             <exclude reference="WaB-aJ-gIX"/>
                                             <exclude reference="hGN-Kf-0IB"/>
+                                            <exclude reference="4wG-FS-kZB"/>
+                                            <exclude reference="p94-wR-awb"/>
+                                            <exclude reference="4O1-bP-GaE"/>
+                                            <exclude reference="5Mz-Hh-af1"/>
+                                            <exclude reference="YiF-44-pzO"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -107,20 +107,20 @@
                                             <include reference="wtb-K5-5e4"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="4O1-bP-GaE"/>
-                                            <include reference="5Mz-Hh-af1"/>
-                                            <include reference="YiF-44-pzO"/>
-                                            <include reference="1Vs-A6-gab"/>
-                                            <include reference="Ds4-pp-tdU"/>
                                             <include reference="4IX-9g-Nvt"/>
                                             <include reference="Waw-85-5bw"/>
                                             <include reference="bT3-ZJ-BMC"/>
                                             <include reference="ebV-Vq-3eY"/>
                                             <include reference="rvW-TV-mN2"/>
-                                            <include reference="4wG-FS-kZB"/>
-                                            <include reference="p94-wR-awb"/>
+                                            <include reference="1Vs-A6-gab"/>
+                                            <include reference="Ds4-pp-tdU"/>
                                             <include reference="WaB-aJ-gIX"/>
                                             <include reference="hGN-Kf-0IB"/>
+                                            <include reference="4wG-FS-kZB"/>
+                                            <include reference="p94-wR-awb"/>
+                                            <include reference="4O1-bP-GaE"/>
+                                            <include reference="5Mz-Hh-af1"/>
+                                            <include reference="YiF-44-pzO"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -140,7 +140,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9Sq-5A-Htz">
                             <connections>
-                                <segue destination="iet-R2-gp4" kind="modal" id="EAV-qJ-vdj"/>
+                                <segue destination="iet-R2-gp4" kind="modal" identifier="toTimerEditView" id="EAV-qJ-vdj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

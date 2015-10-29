@@ -14,6 +14,7 @@ import CoreData
 
 extension TimerEntity {
 
+    @NSManaged var id: String?
     @NSManaged var title: String?
     @NSManaged var from: NSDate?
     @NSManaged var to: NSDate?
