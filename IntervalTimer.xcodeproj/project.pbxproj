@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19471DA61BE3E4830067AD85 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19471DA51BE3E4830067AD85 /* Utility.swift */; };
 		199448C71BDCEEE600F5E45C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448C61BDCEEE600F5E45C /* AppDelegate.swift */; };
 		199448C91BDCEEE600F5E45C /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448C81BDCEEE600F5E45C /* TimerListViewController.swift */; };
 		199448CC1BDCEEE600F5E45C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 199448CA1BDCEEE600F5E45C /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19471DA51BE3E4830067AD85 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		199448C31BDCEEE600F5E45C /* IntervalTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntervalTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		199448C61BDCEEE600F5E45C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		199448C81BDCEEE600F5E45C /* TimerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = "<group>"; };
@@ -43,9 +45,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19471DA41BE3E43E0067AD85 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				19471DA51BE3E4830067AD85 /* Utility.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		199448BA1BDCEEE600F5E45C = {
 			isa = PBXGroup;
 			children = (
+				19471DA41BE3E43E0067AD85 /* Utility */,
 				199448C51BDCEEE600F5E45C /* IntervalTimer */,
 				199448C41BDCEEE600F5E45C /* Products */,
 			);
@@ -147,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19471DA61BE3E4830067AD85 /* Utility.swift in Sources */,
 				199448CF1BDCEEE600F5E45C /* IntervalTimer.xcdatamodeld in Sources */,
 				199448C91BDCEEE600F5E45C /* TimerListViewController.swift in Sources */,
 				199448DE1BDCFC9900F5E45C /* TimerEditViewController.swift in Sources */,
@@ -302,6 +314,7 @@
 				199448DA1BDCEEE600F5E45C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

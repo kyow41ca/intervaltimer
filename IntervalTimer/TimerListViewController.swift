@@ -105,11 +105,18 @@ class TimerListViewController: UITableViewController {
 
         // From
         let lbl2 = tableView.viewWithTag(2) as! UILabel
-        lbl2.text = dateString(from, format: "yyyy/MM/dd")
+        lbl2.text = Utility.dateString(from, format: "yyyy/MM/dd")
         
         // To
         let lbl3 = tableView.viewWithTag(3) as! UILabel
-        lbl3.text = dateString(to, format: "yyyy/MM/dd")
+        lbl3.text = Utility.dateString(to, format: "yyyy/MM/dd")
+        
+        // 進捗バー
+        let prog4 = tableView.viewWithTag(4) as! UIProgressView
+        let fromToSub: Double = to.timeIntervalSinceDate(from)
+        let fromNowSub: Double = Utility.cutTime(NSDate()).timeIntervalSinceDate(from)
+        let percent: Float = Float(fromNowSub / fromToSub)
+        prog4.progress = percent
         
         //let lbl5 = tableView.viewWithTag(5) as! UILabel
         //lbl5.text = dateString(String("\(from.timeIntervalSinceDate(to))"), format: "yyyy/MM/dd")
@@ -145,15 +152,6 @@ class TimerListViewController: UITableViewController {
             super.setEditing(false, animated: true)
             tableView.setEditing(false, animated: true)
         }
-    }
-    
-    // NSDateをStringに変換する
-    private func dateString(date: NSDate, format: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-        dateFormatter.dateFormat = format
-        let dateString: String = dateFormatter.stringFromDate(date)
-        return dateString
     }
 
 

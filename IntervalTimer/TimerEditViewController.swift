@@ -235,8 +235,8 @@ class TimerEditViewController: UITableViewController {
         let newData = IntervalTimer.TimerEntity(entity: timerEntity!, insertIntoManagedObjectContext: timerContext)
         newData.id = NSUUID().UUIDString
         newData.title = titleField.text!.isEmpty ? "New Timer" : titleField.text
-        newData.from = fromPicker.date
-        newData.to = toPicker.date
+        newData.from = Utility.cutTime(fromPicker.date)
+        newData.to = Utility.cutTime(toPicker.date)
         newData.notify = notifyTimePicker.date
         newData.repeats = repeatsSwitch.on
         
@@ -272,8 +272,8 @@ class TimerEditViewController: UITableViewController {
                 
                 // レコードの更新処理
                 editData.title = titleField.text!.isEmpty ? "New Timer" : titleField.text
-                editData.from = fromPicker.date
-                editData.to = toPicker.date
+                editData.from = Utility.cutTime(fromPicker.date)
+                editData.to = Utility.cutTime(toPicker.date)
                 editData.notify = notifyTimePicker.date
                 editData.repeats = repeatsSwitch.on
             }
