@@ -60,16 +60,19 @@ class TimerEditViewController: UITableViewController {
             titleField.text = editData.valueForKeyPath("title") as? String
             
             // 取得したFromをセットする
-            fromLabel.text = format(editData.valueForKeyPath("from") as! NSDate, style: "yyyy/MM/dd")
-            fromPicker.setDate(editData.valueForKeyPath("from") as! NSDate, animated: false)
+            let fromDate: NSDate = editData.valueForKeyPath("from") as! NSDate
+            fromLabel.text = format(fromDate, style: "yyyy/MM/dd")
+            fromPicker.setDate(fromDate, animated: false)
             
             // 取得したToをセットする
-            toLabel.text = format(editData.valueForKeyPath("to") as! NSDate, style: "yyyy/MM/dd")
-            toPicker.setDate(editData.valueForKeyPath("to") as! NSDate, animated: false)
+            let toDate: NSDate = editData.valueForKeyPath("to") as! NSDate
+            toLabel.text = format(toDate, style: "yyyy/MM/dd")
+            toPicker.setDate(toDate, animated: false)
             
             // 取得した通知時刻をセットする
-            notifyTimeLabel.text = format(editData.valueForKeyPath("to") as! NSDate, style: "HH:mm")
-            notifyTimePicker.setDate(editData.valueForKeyPath("to") as! NSDate, animated: false)
+            let notifyDate: NSDate = editData.valueForKeyPath("notify") as! NSDate
+            notifyTimeLabel.text = format(notifyDate, style: "HH:mm")
+            notifyTimePicker.setDate(notifyDate, animated: false)
             
             // 取得したくり返しフラグをセットする
             repeatsSwitch.on = editData.valueForKeyPath("repeats") as! Bool
@@ -219,7 +222,6 @@ class TimerEditViewController: UITableViewController {
     // NSDateをStringに変換する
     func format(date : NSDate, style : String) -> String {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
         dateFormatter.dateFormat = style
         return dateFormatter.stringFromDate(date)
     }
@@ -237,7 +239,7 @@ class TimerEditViewController: UITableViewController {
         newData.title = titleField.text!.isEmpty ? "New Timer" : titleField.text
         newData.from = Utility.cutTime(fromPicker.date)
         newData.to = Utility.cutTime(toPicker.date)
-        newData.notify = notifyTimePicker.date
+        newData.notify = Utility.createNotifyTime(newData.to!, notifyDate: notifyTimePicker.date)
         newData.repeats = repeatsSwitch.on
         
         do {
@@ -274,7 +276,7 @@ class TimerEditViewController: UITableViewController {
                 editData.title = titleField.text!.isEmpty ? "New Timer" : titleField.text
                 editData.from = Utility.cutTime(fromPicker.date)
                 editData.to = Utility.cutTime(toPicker.date)
-                editData.notify = notifyTimePicker.date
+                editData.notify = Utility.createNotifyTime(editData.to!, notifyDate: notifyTimePicker.date)
                 editData.repeats = repeatsSwitch.on
             }
         } catch let error as NSError {
