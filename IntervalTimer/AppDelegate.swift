@@ -17,7 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let types : UIUserNotificationType =
+        [UIUserNotificationType.Badge,
+            UIUserNotificationType.Alert,
+            UIUserNotificationType.Sound]
+        let settins : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settins)
         return true
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        let alert = UIAlertView();
+        alert.title = "受け取りました";
+        alert.message = notification.alertBody;
+        alert.addButtonWithTitle(notification.alertAction!);
+        alert.show();
     }
 
     func applicationWillResignActive(application: UIApplication) {

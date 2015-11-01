@@ -247,6 +247,9 @@ class TimerEditViewController: UITableViewController {
         } catch let error as NSError {
             print(error)
         }
+        
+        // 通知センターに登録する
+        NotifyUtils.addNotifycation(newData)
     }
     
     // 編集したデータをCoreDataにアップデートする
@@ -278,6 +281,10 @@ class TimerEditViewController: UITableViewController {
                 editData.to = Utility.cutTime(toPicker.date)
                 editData.notify = Utility.createNotifyTime(editData.to!, notifyDate: notifyTimePicker.date)
                 editData.repeats = repeatsSwitch.on
+                
+                // 通知センターを登録する
+                NotifyUtils.cancelNotifycation(editData.id!)
+                NotifyUtils.addNotifycation(editData)
             }
         } catch let error as NSError {
             print(error)

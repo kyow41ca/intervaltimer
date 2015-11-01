@@ -70,9 +70,16 @@ class TimerListViewController: UITableViewController {
         
         // 編集モードの時に選択された行のインデックスを取得して、その行のデータを削除する
         if editingStyle == .Delete {
+            // idを取得しておく
+            let notifyId = timerlist[indexPath.row].valueForKeyPath("id") as! String
+            
+            // 削除する
             context.deleteObject(timerlist[indexPath.row] as! NSManagedObject)
             timerlist.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            
+            // 通知センターもキャンセルする
+            NotifyUtils.cancelNotifycation(notifyId)
         }
         // インサートモード？
         else if editingStyle == .Insert {
@@ -96,7 +103,7 @@ class TimerListViewController: UITableViewController {
         let title = data.valueForKeyPath("title") as! String
         let from = data.valueForKeyPath("from") as! NSDate
         let to = data.valueForKeyPath("to") as! NSDate
-        let notify = data.valueForKeyPath("notify") as! NSDate
+        //let notify = data.valueForKeyPath("notify") as! NSDate
         let repeats = data.valueForKeyPath("repeats") as! NSNumber
 
         // タイトル
@@ -118,8 +125,23 @@ class TimerListViewController: UITableViewController {
         let percent: Float = Float(fromNowSub / fromToSub)
         prog4.progress = percent
         
-        //let lbl5 = tableView.viewWithTag(5) as! UILabel
-        //lbl5.text = dateString(String("\(from.timeIntervalSinceDate(to))"), format: "yyyy/MM/dd")
+        // 残日数
+        let aw: String = " away"
+        let lbl5 = tableView.viewWithTag(5) as! UILabel
+        let calendar: NSCalendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        if (calendar.isDate(to, inSameDayAsDate: from)) {
+            lbl5.text = "Time Over"
+        }
+        else {
+            lbl5.text = to.stringForTimeIntervalSinceCreated() + aw
+        }
+        
+        let img6 = tableView.viewWithTag(6) as! UIImageView
+        if (1 == repeats) {
+            img6.image = UIImage(named: "RepIcon.png")
+        } else {
+            img6.image = UIImage(named: "UnRepIcon.png")
+        }
         
         return cell
     }
