@@ -37,6 +37,7 @@ class TimerListViewController: UITableViewController {
         let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context : NSManagedObjectContext = appDel.managedObjectContext
         let freg = NSFetchRequest(entityName: "TimerEntity")
+        freg.sortDescriptors = [NSSortDescriptor(key: "to", ascending: true)]
         
         // セルのデータを全行読み込む
         do {
@@ -128,14 +129,25 @@ class TimerListViewController: UITableViewController {
         // 残日数
         let aw: String = " away"
         let lbl5 = tableView.viewWithTag(5) as! UILabel
+        lbl5.textColor = UIColor.blackColor()
+        
+        // 当日
         let calendar: NSCalendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
-        if (calendar.isDate(to, inSameDayAsDate: from)) {
-            lbl5.text = "Time Over"
+        if (calendar.isDate(Utility.cutTime(NSDate()), inSameDayAsDate: to)) {
+            lbl5.text = "Today!!!"
+            lbl5.textColor = UIColor.redColor()
         }
+        // 過日
+        else if (0 > to.timeIntervalSinceDate(Utility.cutTime(NSDate()))) {
+            lbl5.text = "Time Over..."
+            lbl5.textColor = UIColor.grayColor()
+        }
+        // 当日まで
         else {
             lbl5.text = to.stringForTimeIntervalSinceCreated() + aw
         }
         
+        // くり返しアイコン
         let img6 = tableView.viewWithTag(6) as! UIImageView
         if (1 == repeats) {
             img6.image = UIImage(named: "RepIcon.png")
