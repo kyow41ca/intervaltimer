@@ -105,7 +105,7 @@ class TimerListViewController: UITableViewController {
         let from = data.valueForKeyPath("from") as! NSDate
         let to = data.valueForKeyPath("to") as! NSDate
         //let notify = data.valueForKeyPath("notify") as! NSDate
-        let repeats = data.valueForKeyPath("repeats") as! NSNumber
+        //let repeats = data.valueForKeyPath("repeats") as! NSNumber
 
         // タイトル
         let lbl1 = tableView.viewWithTag(1) as! UILabel
@@ -137,6 +137,11 @@ class TimerListViewController: UITableViewController {
             lbl5.text = "Today!!!"
             lbl5.textColor = UIColor.redColor()
         }
+        // 開始日前
+        else if (0 > NSDate().timeIntervalSinceDate(from)) {
+            lbl5.text = "Previous"
+            lbl5.textColor = UIColor.grayColor()
+        }
         // 過日
         else if (0 > to.timeIntervalSinceDate(Utility.cutTime(NSDate()))) {
             lbl5.text = "Time Over..."
@@ -145,14 +150,6 @@ class TimerListViewController: UITableViewController {
         // 当日まで
         else {
             lbl5.text = to.stringForTimeIntervalSinceCreated() + aw
-        }
-        
-        // くり返しアイコン
-        let img6 = tableView.viewWithTag(6) as! UIImageView
-        if (1 == repeats) {
-            img6.image = UIImage(named: "RepIcon.png")
-        } else {
-            img6.image = UIImage(named: "UnRepIcon.png")
         }
         
         return cell

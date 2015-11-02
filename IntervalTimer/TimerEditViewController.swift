@@ -27,7 +27,7 @@ class TimerEditViewController: UITableViewController {
     @IBOutlet weak var notifyTimePicker: UIDatePicker!
     
     // くり返し
-    @IBOutlet weak var repeatsSwitch: UISwitch!
+    //@IBOutlet weak var repeatsSwitch: UISwitch!
     
     // 前画面からもらった編集データを格納する
     var editData : NSManagedObject!
@@ -59,13 +59,21 @@ class TimerEditViewController: UITableViewController {
             // 取得したタイトルをセットする
             titleField.text = editData.valueForKeyPath("title") as? String
             
-            // 取得したFromをセットする
-            let fromDate: NSDate = editData.valueForKeyPath("from") as! NSDate
+            // 取得したFromとtoをセットする
+            var fromDate: NSDate = editData.valueForKeyPath("from") as! NSDate
+            var toDate: NSDate = editData.valueForKeyPath("to") as! NSDate
+
+            // タイマーが時間切れなら新しい日付をセットしなおす
+            // （期限切れの日にfrom、期限切れの日から前の設定日時のfrom-toの日数が経過した日にtoをセットしておく）
+            if (-1 == Utility.dateCompare(NSDate(), date2: toDate)) {
+                let interval = Utility.dateDiff(Utility.Interval.Day, date1: fromDate, date2: toDate)
+                fromDate = Utility.dateAdd(Utility.Interval.Day, number: interval, date: fromDate)
+                toDate = Utility.dateAdd(Utility.Interval.Day, number: interval, date: toDate)
+            }
+            
             fromLabel.text = format(fromDate, style: "yyyy/MM/dd")
             fromPicker.setDate(fromDate, animated: false)
-            
-            // 取得したToをセットする
-            let toDate: NSDate = editData.valueForKeyPath("to") as! NSDate
+
             toLabel.text = format(toDate, style: "yyyy/MM/dd")
             toPicker.setDate(toDate, animated: false)
             
@@ -75,7 +83,7 @@ class TimerEditViewController: UITableViewController {
             notifyTimePicker.setDate(notifyDate, animated: false)
             
             // 取得したくり返しフラグをセットする
-            repeatsSwitch.on = editData.valueForKeyPath("repeats") as! Bool
+            //repeatsSwitch.on = editData.valueForKeyPath("repeats") as! Bool
         }
     }
 
@@ -240,7 +248,8 @@ class TimerEditViewController: UITableViewController {
         newData.from = Utility.cutTime(fromPicker.date)
         newData.to = Utility.cutTime(toPicker.date)
         newData.notify = Utility.createNotifyTime(newData.to!, notifyDate: notifyTimePicker.date)
-        newData.repeats = repeatsSwitch.on
+        //newData.repeats = repeatsSwitch.on
+        newData.repeats = false // 繰り返し機能はつけないが、カラムは残しておくためすべてfalseにしておく
         
         do {
             try timerContext.save()
@@ -280,7 +289,8 @@ class TimerEditViewController: UITableViewController {
                 editData.from = Utility.cutTime(fromPicker.date)
                 editData.to = Utility.cutTime(toPicker.date)
                 editData.notify = Utility.createNotifyTime(editData.to!, notifyDate: notifyTimePicker.date)
-                editData.repeats = repeatsSwitch.on
+                //newData.repeats = repeatsSwitch.on
+                editData.repeats = false // 繰り返し機能はつけないが、カラムは残しておくためすべてfalseにしておく
                 
                 // 通知センターを登録する
                 NotifyUtils.cancelNotifycation(editData.id!)

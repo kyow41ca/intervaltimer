@@ -10,12 +10,13 @@ import Foundation
 
 extension NSDate {
     func stringForTimeIntervalSinceCreated() -> String {
-        return stringForTimeIntervalSinceCreated(nowDate:NSDate())
+        return stringForTimeIntervalSinceCreated(NSDate(), isDayPrint: true)
     }
     
-    func stringForTimeIntervalSinceCreated(nowDate nowDate:NSDate) -> String {
-        var MinInterval  :Int = 0
-        var HourInterval :Int = 0
+    func stringForTimeIntervalSinceCreated(nowDate: NSDate, isDayPrint: Bool) -> String {
+        //var MinInterval  :Int = 0
+        //var HourInterval :Int = 0
+        let dayPrint: String = isDayPrint ? " days" : ""
         var DayInterval  :Int = 0
         var DayModules   :Int = 0
         let interval = abs(Int(self.timeIntervalSinceDate(nowDate)))
@@ -25,21 +26,21 @@ extension NSDate {
             if (DayModules != 0) {
                 if (DayModules>=3600) {
                     //HourInterval=DayModules/3600;
-                    return String(DayInterval) + " days"
+                    return String(DayInterval+1) + dayPrint
                 } else {
                     if (DayModules >= 60) {
                         //MinInterval=DayModules/60;
-                        return String(DayInterval) + " days"
+                        return String(DayInterval+1) + dayPrint
                     } else {
-                        return String(DayInterval) + " days"
+                        return String(DayInterval+1) + dayPrint
                     }
                 }
             } else {
-                return String(DayInterval) + " days"
+                return String(DayInterval) + dayPrint
             }
         } else {
             // とりあえず1daysを返す
-            return "1 days"
+            return "1" + dayPrint
 //            if (interval >= 3600) {
 //                HourInterval = interval/3600
 //                return String(HourInterval) + " hours"
