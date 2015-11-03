@@ -26,11 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        let alert = UIAlertView();
-        alert.title = "受け取りました";
-        alert.message = notification.alertBody;
-        alert.addButtonWithTitle(notification.alertAction!);
-        alert.show();
+//        let alert = UIAlertController();
+//        alert.title = "受け取りました";
+//        alert.message = notification.alertBody;
+//        alert.addButtonWithTitle(notification.alertAction!);
+//        alert.show();
     }
 
     func applicationWillResignActive(application: UIApplication) {

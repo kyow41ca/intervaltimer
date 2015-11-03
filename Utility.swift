@@ -88,8 +88,8 @@ class Utility {
             comp.minute = number
         case .Second:
             comp.second = number
-        default:
-            comp.day = 0
+//        default:
+//            comp.day = 0
         }
         return calendar.dateByAddingComponents(comp, toDate: date, options: [])!
     }
@@ -133,8 +133,8 @@ class Utility {
             calendar.components(NSCalendarUnit.Second,
                 fromDate: date1, toDate: date2, options:[])
             return comp.second
-        default:
-            return 0
+//        default:
+//            return 0
         }
     }
 

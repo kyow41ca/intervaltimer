@@ -15,7 +15,6 @@
 		199448CC1BDCEEE600F5E45C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 199448CA1BDCEEE600F5E45C /* Main.storyboard */; };
 		199448CF1BDCEEE600F5E45C /* IntervalTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 199448CD1BDCEEE600F5E45C /* IntervalTimer.xcdatamodeld */; };
 		199448D11BDCEEE600F5E45C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 199448D01BDCEEE600F5E45C /* Assets.xcassets */; };
-		199448D41BDCEEE600F5E45C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 199448D21BDCEEE600F5E45C /* LaunchScreen.storyboard */; };
 		199448DE1BDCFC9900F5E45C /* TimerEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448DD1BDCFC9900F5E45C /* TimerEditViewController.swift */; };
 		199448E11BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448DF1BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift */; };
 		199448E21BDCFEF500F5E45C /* TimerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448E01BDCFEF500F5E45C /* TimerEntity.swift */; };
@@ -31,7 +30,6 @@
 		199448CB1BDCEEE600F5E45C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		199448CE1BDCEEE600F5E45C /* IntervalTimer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IntervalTimer.xcdatamodel; sourceTree = "<group>"; };
 		199448D01BDCEEE600F5E45C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		199448D31BDCEEE600F5E45C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		199448D51BDCEEE600F5E45C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		199448DD1BDCFC9900F5E45C /* TimerEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerEditViewController.swift; sourceTree = "<group>"; };
 		199448DF1BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 				199448CA1BDCEEE600F5E45C /* Main.storyboard */,
 				199448DD1BDCFC9900F5E45C /* TimerEditViewController.swift */,
 				199448D01BDCEEE600F5E45C /* Assets.xcassets */,
-				199448D21BDCEEE600F5E45C /* LaunchScreen.storyboard */,
 				199448D51BDCEEE600F5E45C /* Info.plist */,
 				199448CD1BDCEEE600F5E45C /* IntervalTimer.xcdatamodeld */,
 				199448DF1BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift */,
@@ -152,7 +149,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				199448D41BDCEEE600F5E45C /* LaunchScreen.storyboard in Resources */,
 				199448D11BDCEEE600F5E45C /* Assets.xcassets in Resources */,
 				199448CC1BDCEEE600F5E45C /* Main.storyboard in Resources */,
 			);
@@ -186,14 +182,6 @@
 				199448CB1BDCEEE600F5E45C /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		199448D21BDCEEE600F5E45C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				199448D31BDCEEE600F5E45C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
