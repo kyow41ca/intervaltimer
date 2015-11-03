@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TimerEditViewController: UITableViewController {
+class TimerEditViewController: UITableViewController, UITextFieldDelegate {
     
     // タイトル
     @IBOutlet weak var titleField: UITextField!
@@ -34,6 +34,9 @@ class TimerEditViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // textField の情報を受け取るための delegate を設定
+        titleField.delegate = self
         
         // リストからもらった編集データがNULLの場合＝新規登録
         if (editData == nil) {
