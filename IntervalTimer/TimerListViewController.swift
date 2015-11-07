@@ -100,58 +100,44 @@ class TimerListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
         // CoreDataから取得したデータのうち、今の行を読み込む
-        let data : NSManagedObject = timerlist[indexPath.row] as! NSManagedObject
-        
-        let title = data.valueForKeyPath("title") as! String
-        let from = data.valueForKeyPath("from") as! NSDate
-        let to = data.valueForKeyPath("to") as! NSDate
-        //let notify = data.valueForKeyPath("notify") as! NSDate
-        //let repeats = data.valueForKeyPath("repeats") as! NSNumber
+        let rowData: [String : AnyObject] = Utility.rowDataFormat(timerlist[indexPath.row] as! NSManagedObject)
 
         // タイトル
         let lbl1 = tableView.viewWithTag(1) as! UILabel
-        lbl1.text = title
+        lbl1.text = rowData[Utility.TITLE] as? String
 
         // From
         let lbl2 = tableView.viewWithTag(2) as! UILabel
-        lbl2.text = Utility.dateString(from, format: "yyyy/MM/dd")
+        lbl2.text = rowData[Utility.FROM_STR] as? String
         
         // To
         let lbl3 = tableView.viewWithTag(3) as! UILabel
-        lbl3.text = Utility.dateString(to, format: "yyyy/MM/dd")
+        lbl3.text = rowData[Utility.TO_STR] as? String
         
         // 進捗バー
         let prog4 = tableView.viewWithTag(4) as! UIProgressView
-        let fromToSub: Double = to.timeIntervalSinceDate(from)
-        let fromNowSub: Double = Utility.cutTime(NSDate()).timeIntervalSinceDate(from)
-        let percent: Float = Float(fromNowSub / fromToSub)
-        prog4.progress = percent
+        prog4.progress = rowData[Utility.PERCENT] as! Float
         
         // 残日数
-        let aw: String = " away"
         let lbl5 = tableView.viewWithTag(5) as! UILabel
         lbl5.textColor = UIColor.blackColor()
         
+        let countDown: String = (rowData[Utility.COUNTDOWN] as? String)!
+        
         // 当日
-        let calendar: NSCalendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
-        if (calendar.isDate(Utility.cutTime(NSDate()), inSameDayAsDate: to)) {
-            lbl5.text = "Today!!!"
+        if (countDown == Utility.TODAY) {
             lbl5.textColor = UIColor.redColor()
         }
         // 開始日前
-        else if (0 > NSDate().timeIntervalSinceDate(from)) {
-            lbl5.text = "Previous"
+        else if (countDown == Utility.PREV) {
             lbl5.textColor = UIColor.grayColor()
         }
         // 過日
-        else if (0 > to.timeIntervalSinceDate(Utility.cutTime(NSDate()))) {
-            lbl5.text = "Time Over..."
+        else if (countDown == Utility.TIMEOVER) {
             lbl5.textColor = UIColor.grayColor()
         }
-        // 当日まで
-        else {
-            lbl5.text = to.stringForTimeIntervalSinceCreated() + aw
-        }
+        
+        lbl5.text = countDown
         
         return cell
     }

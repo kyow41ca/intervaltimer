@@ -67,10 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-        // 受信したメッセージ
-        print("receiveMessage::\(message)")
-        
-        // ここで必要なデータをWatchに送信
         // CoreData呼び出し
         let context : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         let freg = NSFetchRequest(entityName: "TimerEntity")
@@ -84,22 +80,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         } catch let error as NSError {
             print(error)
         }
-
-        var entList: Array<Array<AnyObject>> = []
         
-        // TimerEntityのArrayに詰め替える
-        for data in timerlist {
-            var ent: Array<AnyObject> = []
-            ent.append((data.valueForKeyPath("title") as? String)!)
-            ent.append((data.valueForKeyPath("from") as? NSDate)!)
-            ent.append((data.valueForKeyPath("to") as? NSDate)!)
-            //ent.notify = data.valueForKeyPath("notify") as! NSDate
-            //ent.repeats = data.valueForKeyPath("repeats") as! NSNumber
-            entList.append(ent)
+        let val: Int = message["val"] as! Int
+        
+        // 指定の番号のリストのみを返す
+        var replyMessage: [String : AnyObject]
+        do {
+            replyMessage = Utility.rowDataFormat(try timerlist[val] as! NSManagedObject)
+        } catch let error as NSError {
+            print(error)
+            replyMessage["nodata"] = true
         }
-        
-        let replyMessage = ["data" : entList]
-        //let replyMessage = ["data" : "msgmsgmsg"]
+        replyMessage["nodata"] = false
         replyHandler(replyMessage)
     }
 

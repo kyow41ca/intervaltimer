@@ -23,7 +23,7 @@
 		19FDAA131BE8E67B003B2934 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FDAA111BE8E67B003B2934 /* Interface.storyboard */; };
 		19FDAA151BE8E67B003B2934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FDAA141BE8E67B003B2934 /* Assets.xcassets */; };
 		19FDAA1C1BE8E67B003B2934 /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19FDAA1B1BE8E67B003B2934 /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		19FDAA211BE8E67B003B2934 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDAA201BE8E67B003B2934 /* InterfaceController.swift */; };
+		19FDAA211BE8E67B003B2934 /* TimerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDAA201BE8E67B003B2934 /* TimerListController.swift */; };
 		19FDAA231BE8E67B003B2934 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDAA221BE8E67B003B2934 /* ExtensionDelegate.swift */; };
 		19FDAA251BE8E67B003B2934 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDAA241BE8E67B003B2934 /* ComplicationController.swift */; };
 		19FDAA271BE8E67B003B2934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FDAA261BE8E67B003B2934 /* Assets.xcassets */; };
@@ -127,7 +127,7 @@
 		19FDAA141BE8E67B003B2934 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19FDAA161BE8E67B003B2934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19FDAA1B1BE8E67B003B2934 /* Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		19FDAA201BE8E67B003B2934 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		19FDAA201BE8E67B003B2934 /* TimerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListController.swift; sourceTree = "<group>"; };
 		19FDAA221BE8E67B003B2934 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		19FDAA241BE8E67B003B2934 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		19FDAA261BE8E67B003B2934 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Watch Extension/Assets.xcassets"; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				19FDAA361BE8E99B003B2934 /* Watch Extension.entitlements */,
-				19FDAA201BE8E67B003B2934 /* InterfaceController.swift */,
+				19FDAA201BE8E67B003B2934 /* TimerListController.swift */,
 				19FDAA221BE8E67B003B2934 /* ExtensionDelegate.swift */,
 				19FDAA241BE8E67B003B2934 /* ComplicationController.swift */,
 				19FDAA281BE8E67B003B2934 /* Info.plist */,
@@ -490,7 +490,7 @@
 			files = (
 				19FDAA371BE8EB64003B2934 /* IntervalTimer.xcdatamodeld in Sources */,
 				19FDAA231BE8E67B003B2934 /* ExtensionDelegate.swift in Sources */,
-				19FDAA211BE8E67B003B2934 /* InterfaceController.swift in Sources */,
+				19FDAA211BE8E67B003B2934 /* TimerListController.swift in Sources */,
 				19FDAA381BE8EB9A003B2934 /* TimerEntity.swift in Sources */,
 				19FDAA391BE8EB9E003B2934 /* TimerEntity+CoreDataProperties.swift in Sources */,
 				19FDAA251BE8E67B003B2934 /* ComplicationController.swift in Sources */,

@@ -5,51 +5,77 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--list1-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Watch" customModuleProvider="target">
+                <controller identifier="list1" id="AgC-eL-Hgc" customClass="TimerListController" customModule="Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="2bC-P4-NoX">
+                        <group width="1" height="1" alignment="left" layout="vertical" id="fJg-To-3LH">
                             <items>
-                                <label width="136" alignment="left" isAccessibilityElement="NO" text="My wife Birthday" textAlignment="center" id="1P5-Sd-FX3">
-                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                </label>
-                                <label width="136" alignment="left" text="is" textAlignment="center" id="HWU-nq-4kI">
-                                    <fontDescription key="font" type="system" pointSize="11"/>
-                                </label>
-                                <label width="136" alignment="left" text="216 days away" textAlignment="center" id="LXY-xN-0AA">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                </label>
+                                <label alignment="center" verticalAlignment="center" text="Now Loading..." textAlignment="center" numberOfLines="0" id="fLS-gG-XPR"/>
                             </items>
                         </group>
-                        <group width="1" height="7" alignment="left" id="6p0-BW-4qG"/>
-                        <separator alignment="left" id="Ecz-9Q-F5x">
-                            <color key="color" white="0.74109411410000003" alpha="1" colorSpace="calibratedWhite"/>
-                        </separator>
-                        <group width="1" height="7" alignment="left" id="cnF-ru-6zk"/>
-                        <group width="1" alignment="left" layout="vertical" id="74c-ik-YnS">
+                        <group width="1" height="1" alignment="left" id="hBx-8Y-12a">
                             <items>
-                                <label width="136" alignment="left" text="2000/01/01" textAlignment="center" id="Hc2-J5-tod">
-                                    <fontDescription key="font" type="system" pointSize="13"/>
-                                </label>
-                                <label width="136" height="13" alignment="left" text="〜" textAlignment="center" id="66M-qZ-qwi">
-                                    <fontDescription key="font" type="system" pointSize="13"/>
-                                </label>
-                                <label width="136" alignment="left" text="2000/01/01" textAlignment="center" id="qIX-Eh-tp4">
-                                    <fontDescription key="font" type="system" pointSize="13"/>
-                                </label>
+                                <group width="1" alignment="left" verticalAlignment="center" layout="vertical" id="Gfa-Rl-wHt">
+                                    <items>
+                                        <group width="1" alignment="left" layout="vertical" id="2bC-P4-NoX">
+                                            <items>
+                                                <label width="1" alignment="left" isAccessibilityElement="NO" text="My wife Birthday" textAlignment="center" id="1P5-Sd-FX3">
+                                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                </label>
+                                                <label width="1" alignment="left" text="is" textAlignment="center" id="HWU-nq-4kI">
+                                                    <fontDescription key="font" type="system" pointSize="11"/>
+                                                </label>
+                                                <label width="1" alignment="left" text="216 days away" textAlignment="center" id="LXY-xN-0AA">
+                                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                        <group width="1" height="7" alignment="left" id="6p0-BW-4qG"/>
+                                        <separator alignment="left" alpha="0.40000000000000002" id="Ecz-9Q-F5x">
+                                            <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </separator>
+                                        <group width="1" height="7" alignment="left" id="cnF-ru-6zk"/>
+                                        <group width="1" alignment="left" layout="vertical" id="74c-ik-YnS">
+                                            <items>
+                                                <label width="1" alignment="left" text="2000/01/01" textAlignment="center" id="Hc2-J5-tod">
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                </label>
+                                                <label width="1" height="13" alignment="left" text="〜" textAlignment="center" id="66M-qZ-qwi">
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                </label>
+                                                <label width="1" alignment="left" text="2000/01/01" textAlignment="center" id="qIX-Eh-tp4">
+                                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                    </items>
+                                </group>
                             </items>
                         </group>
                     </items>
+                    <menu key="menu" id="H16-TL-Cio">
+                        <items>
+                            <menuItem title="Reload" icon="resume" id="tRq-Mu-lc6">
+                                <connections>
+                                    <action selector="reload" destination="AgC-eL-Hgc" id="45c-YV-gJb"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
+                        <outlet property="countDownLbl" destination="LXY-xN-0AA" id="AGA-di-AOj"/>
+                        <outlet property="errLbl" destination="fLS-gG-XPR" id="KAp-uT-3zG"/>
                         <outlet property="fromLabel" destination="Hc2-J5-tod" id="xjg-9X-E9y"/>
+                        <outlet property="loadGroup" destination="fJg-To-3LH" id="r9h-7o-fOH"/>
+                        <outlet property="mainGroup" destination="hBx-8Y-12a" id="g2j-EH-X8a"/>
                         <outlet property="titleLabel" destination="1P5-Sd-FX3" id="ql4-eF-Gle"/>
                         <outlet property="toLabel" destination="qIX-Eh-tp4" id="zXd-nq-taD"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="268" y="365"/>
+            <point key="canvasLocation" x="124" y="502.5"/>
         </scene>
     </scenes>
 </document>

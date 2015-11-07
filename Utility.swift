@@ -7,8 +7,23 @@
 //
 
 import Foundation
+import CoreData
 
 class Utility {
+    
+    internal static let TITLE: String = "title"
+    internal static let FROM: String = "from"
+    internal static let TO: String = "to"
+    
+    internal static let FROM_STR: String = "fromStr"
+    internal static let TO_STR: String = "toStr"
+    
+    internal static let COUNTDOWN: String = "countDown"
+    internal static let PERCENT: String = "percent"
+    
+    internal static let TODAY: String = "Today!!!"
+    internal static let PREV: String = "Previous"
+    internal static let TIMEOVER: String = "Time Over..."
 
     // NSDateをStringに変換する
     internal static func dateString(date: NSDate, format: String) -> String {
@@ -150,6 +165,58 @@ class Utility {
         }
     }
     
-    //
+    // タイマーリストの行データを整理して返す
+    internal static func rowDataFormat(data: NSManagedObject) -> [String : AnyObject] {
+        var rowData: [String : AnyObject] = [:]
+        
+        // 基本データ変数化
+        let title = data.valueForKeyPath("title") as! String
+        let from = data.valueForKeyPath("from") as! NSDate
+        let to = data.valueForKeyPath("to") as! NSDate
+        //let notify = data.valueForKeyPath("notify") as! NSDate
+        //let repeats = data.valueForKeyPath("repeats") as! NSNumber
+        
+        // 基本データ
+        rowData[TITLE] = title
+        //rowData[FROM] = from
+        //rowData[TO] = to
+        //rowData = ["notify" : notify]
+        //rowData = ["repeats" : repeats]
+        
+        // 日付文字列
+        rowData[FROM_STR] = Utility.dateString(from, format: "yyyy/MM/dd")
+        rowData[TO_STR] = Utility.dateString(to, format: "yyyy/MM/dd")
+        
+        // 残日数
+        var countDown: String = ""
+        
+        // 当日
+        let calendar: NSCalendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        if (calendar.isDate(Utility.cutTime(NSDate()), inSameDayAsDate: to)) {
+            countDown = Utility.TODAY
+        }
+        // 開始日前
+        else if (0 > NSDate().timeIntervalSinceDate(from)) {
+            countDown = Utility.PREV
+        }
+        // 過日
+        else if (0 > to.timeIntervalSinceDate(Utility.cutTime(NSDate()))) {
+            countDown = Utility.TIMEOVER
+        }
+        // 当日まで
+        else {
+            countDown = to.stringForTimeIntervalSinceCreated() + " away"
+        }
+        
+        rowData[COUNTDOWN] = countDown
+        
+        // 進捗バーのパーセンテージ
+        let fromToSub: Double = to.timeIntervalSinceDate(from)
+        let fromNowSub: Double = Utility.cutTime(NSDate()).timeIntervalSinceDate(from)
+        let percent: Float = Float(fromNowSub / fromToSub)
+        rowData[PERCENT] = percent
+        
+        return rowData
+    }
     
 }
