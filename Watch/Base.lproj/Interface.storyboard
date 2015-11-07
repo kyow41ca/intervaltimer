@@ -10,13 +10,46 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Watch" customModuleProvider="target">
                     <items>
-                        <label alignment="left" text="Label" id="1P5-Sd-FX3"/>
+                        <group width="1" alignment="left" layout="vertical" id="2bC-P4-NoX">
+                            <items>
+                                <label width="136" alignment="left" isAccessibilityElement="NO" text="My wife Birthday" textAlignment="center" id="1P5-Sd-FX3">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label width="136" alignment="left" text="is" textAlignment="center" id="HWU-nq-4kI">
+                                    <fontDescription key="font" type="system" pointSize="11"/>
+                                </label>
+                                <label width="136" alignment="left" text="216 days away" textAlignment="center" id="LXY-xN-0AA">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" height="7" alignment="left" id="6p0-BW-4qG"/>
+                        <separator alignment="left" id="Ecz-9Q-F5x">
+                            <color key="color" white="0.74109411410000003" alpha="1" colorSpace="calibratedWhite"/>
+                        </separator>
+                        <group width="1" height="7" alignment="left" id="cnF-ru-6zk"/>
+                        <group width="1" alignment="left" layout="vertical" id="74c-ik-YnS">
+                            <items>
+                                <label width="136" alignment="left" text="2000/01/01" textAlignment="center" id="Hc2-J5-tod">
+                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                </label>
+                                <label width="136" height="13" alignment="left" text="〜" textAlignment="center" id="66M-qZ-qwi">
+                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                </label>
+                                <label width="136" alignment="left" text="2000/01/01" textAlignment="center" id="qIX-Eh-tp4">
+                                    <fontDescription key="font" type="system" pointSize="13"/>
+                                </label>
+                            </items>
+                        </group>
                     </items>
                     <connections>
-                        <outlet property="testLabel" destination="1P5-Sd-FX3" id="Epg-NY-YK9"/>
+                        <outlet property="fromLabel" destination="Hc2-J5-tod" id="xjg-9X-E9y"/>
+                        <outlet property="titleLabel" destination="1P5-Sd-FX3" id="ql4-eF-Gle"/>
+                        <outlet property="toLabel" destination="qIX-Eh-tp4" id="zXd-nq-taD"/>
                     </connections>
                 </controller>
             </objects>
+            <point key="canvasLocation" x="268" y="365"/>
         </scene>
     </scenes>
 </document>

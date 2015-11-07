@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import IntervalTimerKit
 
 class TimerEditViewController: UITableViewController, UITextFieldDelegate {
     
@@ -240,8 +241,8 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
     // 新規データをCoreDataにインサートする
     func createSaveData() {
         // CoreData呼び出し
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let timerContext: NSManagedObjectContext = appDel.managedObjectContext
+        //let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let timerContext: NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         let timerEntity: NSEntityDescription! = NSEntityDescription.entityForName("TimerEntity", inManagedObjectContext: timerContext)
         
         // 画面から取得したデータで挿入する
@@ -267,8 +268,8 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
     // 編集したデータをCoreDataにアップデートする
     func editSaveData() {
         // CoreData呼び出し
-        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let timerContext: NSManagedObjectContext = appDel.managedObjectContext
+        //let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let timerContext: NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         let timerEntity = NSEntityDescription.entityForName("TimerEntity", inManagedObjectContext: timerContext);
         
         // NSFetchRequest SQLのSelect文のようなイメージ

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import IntervalTimerKit
 
 class TimerListViewController: UITableViewController {
     
@@ -34,8 +35,8 @@ class TimerListViewController: UITableViewController {
         }
         
         // CoreData呼び出し
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context : NSManagedObjectContext = appDel.managedObjectContext
+        //let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         let freg = NSFetchRequest(entityName: "TimerEntity")
         freg.sortDescriptors = [NSSortDescriptor(key: "to", ascending: true)]
         
@@ -66,8 +67,8 @@ class TimerListViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // CoreData呼び出し
-        let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context : NSManagedObjectContext = appDel.managedObjectContext
+        //let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         
         // 編集モードの時に選択された行のインデックスを取得して、その行のデータを削除する
         if editingStyle == .Delete {

@@ -7,11 +7,36 @@
 //
 
 import WatchKit
+import WatchConnectivity
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
+    
+    // Tableで使用する配列を設定する.
+    var timerlist: Array<TimerEntity>=[]
+    var str: String = ""
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
+//        if (WCSession.isSupported()) {
+//            let session = WCSession.defaultSession()
+//            session.delegate = self;
+//            session.activateSession()
+//            
+//            if (session.reachable) {
+//                
+//                let contents = ["body" : "sendInteractiveMessaging"]
+//                
+//                session.sendMessage(contents, replyHandler: { (replyMessage) -> Void in
+//                    //iOSからのデータを受信した時の処理
+//                    print("receive::\replyMessage")
+//                    //self.timerlist = replyMessage["data"] as! Array<TimerEntity>
+//                    self.str = replyMessage["data"] as! String
+//                    //self.titleLabel.setText(str)
+//                    }) { (error) -> Void in
+//                        print(error)
+//                }
+//            }
+//        }
     }
 
     func applicationDidBecomeActive() {
