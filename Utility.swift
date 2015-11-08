@@ -18,8 +18,9 @@ class Utility {
     internal static let FROM_STR: String = "fromStr"
     internal static let TO_STR: String = "toStr"
     
-    internal static let COUNTDOWN: String = "countDown"
-    internal static let COUNTDOWN_STR = "countDownStr"
+    internal static let COUNTDOWN_NUM: String = "countDownNum"
+    internal static let COUNTDOWN_NUM_STR = "countDownNumStr"
+    internal static let COUNTDOWN_STATE = "countDownState"
     internal static let PERCENT: String = "percent"
     
     internal static let TODAY: String = "Today!!!"
@@ -189,28 +190,29 @@ class Utility {
         rowData[TO_STR] = Utility.dateString(to, format: "yyyy/MM/dd")
         
         // 残日数文字
-        rowData[COUNTDOWN] = to.stringForTimeIntervalSinceCreated()
-        var countDownStr: String = ""
+        rowData[COUNTDOWN_NUM] = to.stringForTimeIntervalSinceCreated(NSDate(), isDayPrint: false)
+        rowData[COUNTDOWN_NUM_STR] = to.stringForTimeIntervalSinceCreated()
+        var countDownState: String = ""
         
         // 当日
         let calendar: NSCalendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
         if (calendar.isDate(Utility.cutTime(NSDate()), inSameDayAsDate: to)) {
-            countDownStr = Utility.TODAY
+            countDownState = Utility.TODAY
         }
         // 開始日前
         else if (0 > NSDate().timeIntervalSinceDate(from)) {
-            countDownStr = Utility.PREV
+            countDownState = Utility.PREV
         }
         // 過日
         else if (0 > to.timeIntervalSinceDate(Utility.cutTime(NSDate()))) {
-            countDownStr = Utility.TIMEOVER
+            countDownState = Utility.TIMEOVER
         }
         // 当日まで
         else {
-            countDownStr = " away"
+            countDownState = " away"
         }
         
-        rowData[COUNTDOWN_STR] = countDownStr
+        rowData[COUNTDOWN_STATE] = countDownState
         
         // 進捗バーのパーセンテージ
         let fromToSub: Double = to.timeIntervalSinceDate(from)

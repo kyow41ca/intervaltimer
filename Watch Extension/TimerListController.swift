@@ -9,6 +9,7 @@
 import WatchKit
 import Foundation
 import WatchConnectivity
+import ClockKit
 
 class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensionDelegate {
     
@@ -28,8 +29,9 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
     let FROM_STR: String = "fromStr"
     let TO_STR: String = "toStr"
     
-    let COUNTDOWN: String = "countDown"
-    let COUNTDOWN_STR = "countDownStr"
+    let COUNTDOWN_NUM: String = "countDownNum"
+    let COUNTDOWN_NUM_STR = "countDownNumStr"
+    let COUNTDOWN_STATE = "countDownState"
     let PERCENT: String = "percent"
     
     let TODAY: String = "Today!!!"
@@ -89,31 +91,41 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
             self.loadGroup.setHidden(true)
             self.titleLabel.setText(timer[self.TITLE] as? String)
             
-            let countDown: String = (timer[self.COUNTDOWN] as? String)!
-            let countDownStr: String = (timer[self.COUNTDOWN_STR] as? String)!
+            let countDownNumStr: String = (timer[self.COUNTDOWN_NUM_STR] as? String)!
+            let countDownState: String = (timer[self.COUNTDOWN_STATE] as? String)!
             
             // 当日
-            if (countDownStr == self.TODAY) {
+            if (countDownState == self.TODAY) {
                 self.countDownLbl.setTextColor(UIColor.redColor())
-                self.countDownLbl.setText(countDownStr)
+                self.countDownLbl.setText(countDownState)
             }
                 // 開始日前
-            else if (countDownStr == self.PREV) {
+            else if (countDownState == self.PREV) {
                 self.countDownLbl.setTextColor(UIColor.grayColor())
-                self.countDownLbl.setText(countDownStr)
+                self.countDownLbl.setText(countDownState)
             }
                 // 過日
-            else if (countDownStr == self.TIMEOVER) {
+            else if (countDownState == self.TIMEOVER) {
                 self.countDownLbl.setTextColor(UIColor.grayColor())
-                self.countDownLbl.setText(countDownStr)
+                self.countDownLbl.setText(countDownState)
             }
             else {
                 self.countDownLbl.setTextColor(UIColor.whiteColor())
-                self.countDownLbl.setText(countDown + countDownStr)
+                self.countDownLbl.setText(countDownNumStr + countDownState)
             }
             
             self.fromLabel.setText(timer[self.FROM_STR] as? String)
             self.toLabel.setText(timer[self.TO_STR] as? String)
+            
+            updateComplication()
+        }
+
+    }
+    
+    private func updateComplication() {
+        let server: CLKComplicationServer = CLKComplicationServer.sharedInstance()
+        for var complication: CLKComplication in server.activeComplications {
+            server.reloadTimelineForComplication(complication)
         }
     }
 }

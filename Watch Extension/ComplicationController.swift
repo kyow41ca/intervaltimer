@@ -18,8 +18,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     let FROM_STR: String = "fromStr"
     let TO_STR: String = "toStr"
     
-    let COUNTDOWN: String = "countDown"
-    let COUNTDOWN_STR = "countDownStr"
+    let COUNTDOWN_NUM: String = "countDownNum"
+    let COUNTDOWN_NUM_STR = "countDownNumStr"
+    let COUNTDOWN_STATE = "countDownState"
     let PERCENT: String = "percent"
     
     let TODAY: String = "Today!!!"
@@ -66,25 +67,26 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             let title = timer[TITLE] as! String
             let fromStr = timer[FROM_STR] as! String
             let toStr = timer[TO_STR] as! String
-            let countDown = timer[COUNTDOWN] as! String
-            let countDownStr = timer[COUNTDOWN_STR] as! String
+            let countDownNum = timer[COUNTDOWN_NUM] as! String
+            let countDownNumStr = timer[COUNTDOWN_NUM_STR] as! String
+            let countDownState = timer[COUNTDOWN_STATE] as! String
             var cnt: String = ""
             let percent = timer[PERCENT] as! Float
         
             // 当日
-            if (countDownStr == self.TODAY) {
-                cnt = countDownStr
+            if (countDownState == self.TODAY) {
+                cnt = countDownState
             }
             // 開始日前
-            else if (countDownStr == self.PREV) {
-                cnt = countDownStr
+            else if (countDownState == self.PREV) {
+                cnt = countDownState
             }
             // 過日
-            else if (countDownStr == self.TIMEOVER) {
-                cnt = countDownStr
+            else if (countDownState == self.TIMEOVER) {
+                cnt = countDownState
             }
             else {
-                cnt = countDown + countDownStr
+                cnt = countDownNumStr + countDownState
             }
         
             if (complication.family == .ModularLarge) {
@@ -92,11 +94,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
                 handler(entry)
             }
             else if (complication.family == .ModularSmall) {
-                let entry = createTimeLineEntryMS(countDown, fraction: percent, date: NSDate())
+                let entry = createTimeLineEntryMS(countDownNum, fraction: percent, date: NSDate())
                 handler(entry)
             }
             else if (complication.family == .CircularSmall) {
-                let entry = createTimeLineEntryCS(countDown, fraction: percent, date: NSDate())
+                let entry = createTimeLineEntryCS(countDownNum, fraction: percent, date: NSDate())
                 handler(entry)
             }
             else if (complication.family == .UtilitarianLarge) {
@@ -104,7 +106,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
                 handler(entry)
             }
             else if (complication.family == .UtilitarianSmall) {
-                let entry = createTimeLineEntryUS(countDown, date: NSDate())
+                let entry = createTimeLineEntryUS(countDownNum, date: NSDate())
                 handler(entry)
             }
             else {
@@ -161,7 +163,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             templateML.headerImageProvider = CLKImageProvider(onePieceImage: timerImg1!)
             templateML.headerTextProvider = CLKSimpleTextProvider(text: "TimerTitle")
             templateML.body1TextProvider = CLKSimpleTextProvider(text: "CountDown")
-            templateML.body2TextProvider = CLKSimpleTextProvider(text: "from - to")
+            templateML.body2TextProvider = CLKSimpleTextProvider(text: "ToDate")
             
             handler(templateML)
         }
@@ -188,7 +190,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             let templateUL = CLKComplicationTemplateUtilitarianLargeFlat()
             
             templateUL.imageProvider = CLKImageProvider(onePieceImage: timerImg2!)
-            templateUL.textProvider = CLKSimpleTextProvider(text: "TimerTitle&CountDown")
+            templateUL.textProvider = CLKSimpleTextProvider(text: "TimerTitle")
             
             handler(templateUL)
         }
@@ -213,7 +215,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         template.headerImageProvider = CLKImageProvider(onePieceImage: timerImg!)
         template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
         template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
-        template.body2TextProvider = CLKSimpleTextProvider(text: body2Text)
+        template.body2TextProvider = CLKSimpleTextProvider(text: "〜" + body2Text)
         
         let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         
