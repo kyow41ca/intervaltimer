@@ -71,7 +71,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             let countDownNumStr = timer[COUNTDOWN_NUM_STR] as! String
             let countDownState = timer[COUNTDOWN_STATE] as! String
             var cnt: String = ""
-            let percent = timer[PERCENT] as! Float
+            let percent = (1.0 as Float) - (timer[PERCENT] as! Float)
         
             // 当日
             if (countDownState == self.TODAY) {
@@ -171,7 +171,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             let templateMS = CLKComplicationTemplateModularSmallRingText()
             
             templateMS.textProvider = CLKSimpleTextProvider(text: "999")
-            templateMS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Open.rawValue)!
+            templateMS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
             templateMS.fillFraction = 0.5 as Float
             
             handler(templateMS)
@@ -180,7 +180,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             let templateCS = CLKComplicationTemplateCircularSmallRingText()
             
             templateCS.textProvider = CLKSimpleTextProvider(text: "999")
-            templateCS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Open.rawValue)!
+            templateCS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
             templateCS.fillFraction = 0.5 as Float
             
             handler(templateCS)
@@ -226,7 +226,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         let template = CLKComplicationTemplateModularSmallRingText()
         
         template.textProvider = CLKSimpleTextProvider(text: bodyText)
-        template.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Open.rawValue)!
+        template.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
         template.fillFraction = fraction
         
         let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
@@ -238,7 +238,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         let template = CLKComplicationTemplateCircularSmallRingText()
         
         template.textProvider = CLKSimpleTextProvider(text: bodyText)
-        template.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Open.rawValue)!
+        template.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
         template.fillFraction = fraction
         
         let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
