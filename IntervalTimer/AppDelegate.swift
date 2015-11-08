@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         DataAccess.sharedInstance.saveContext()
     }
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+    internal func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         // CoreData呼び出し
         let context : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         let freg = NSFetchRequest(entityName: "TimerEntity")
@@ -81,17 +81,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             print(error)
         }
         
+        // リストがなければノーデータを返す
+        if (0 == timerlist.count) {
+            var replyMessage: [String : AnyObject] = [:]
+            replyMessage["nodata"] = true
+            replyHandler(replyMessage)
+            return
+        }
+        
         let val: Int = message["val"] as! Int
         
         // 指定の番号のリストのみを返す
-        var replyMessage: [String : AnyObject]
-        do {
-            replyMessage = Utility.rowDataFormat(try timerlist[val] as! NSManagedObject)
-        } catch let error as NSError {
-            print(error)
-            replyMessage["nodata"] = true
-        }
+        var replyMessage: [String : AnyObject] = Utility.rowDataFormat(timerlist[val] as! NSManagedObject)
         replyMessage["nodata"] = false
+        
         replyHandler(replyMessage)
     }
 

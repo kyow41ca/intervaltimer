@@ -19,6 +19,7 @@ class Utility {
     internal static let TO_STR: String = "toStr"
     
     internal static let COUNTDOWN: String = "countDown"
+    internal static let COUNTDOWN_STR = "countDownStr"
     internal static let PERCENT: String = "percent"
     
     internal static let TODAY: String = "Today!!!"
@@ -187,28 +188,29 @@ class Utility {
         rowData[FROM_STR] = Utility.dateString(from, format: "yyyy/MM/dd")
         rowData[TO_STR] = Utility.dateString(to, format: "yyyy/MM/dd")
         
-        // 残日数
-        var countDown: String = ""
+        // 残日数文字
+        rowData[COUNTDOWN] = to.stringForTimeIntervalSinceCreated()
+        var countDownStr: String = ""
         
         // 当日
         let calendar: NSCalendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
         if (calendar.isDate(Utility.cutTime(NSDate()), inSameDayAsDate: to)) {
-            countDown = Utility.TODAY
+            countDownStr = Utility.TODAY
         }
         // 開始日前
         else if (0 > NSDate().timeIntervalSinceDate(from)) {
-            countDown = Utility.PREV
+            countDownStr = Utility.PREV
         }
         // 過日
         else if (0 > to.timeIntervalSinceDate(Utility.cutTime(NSDate()))) {
-            countDown = Utility.TIMEOVER
+            countDownStr = Utility.TIMEOVER
         }
         // 当日まで
         else {
-            countDown = to.stringForTimeIntervalSinceCreated() + " away"
+            countDownStr = " away"
         }
         
-        rowData[COUNTDOWN] = countDown
+        rowData[COUNTDOWN_STR] = countDownStr
         
         // 進捗バーのパーセンテージ
         let fromToSub: Double = to.timeIntervalSinceDate(from)

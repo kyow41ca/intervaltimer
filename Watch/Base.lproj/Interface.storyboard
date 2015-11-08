@@ -15,7 +15,7 @@
                                 <label alignment="center" verticalAlignment="center" text="Now Loading..." textAlignment="center" numberOfLines="0" id="fLS-gG-XPR"/>
                             </items>
                         </group>
-                        <group width="1" height="1" alignment="left" id="hBx-8Y-12a">
+                        <group width="1" height="1" alignment="left" hidden="YES" id="hBx-8Y-12a">
                             <items>
                                 <group width="1" alignment="left" verticalAlignment="center" layout="vertical" id="Gfa-Rl-wHt">
                                     <items>

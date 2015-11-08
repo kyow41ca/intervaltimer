@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1905D41D1BEE6297003EC9F8 /* tab_timerlist_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 1905D41C1BEE6297003EC9F8 /* tab_timerlist_off.png */; };
 		19471DA61BE3E4830067AD85 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19471DA51BE3E4830067AD85 /* Utility.swift */; };
 		19471DA91BE4DDEE0067AD85 /* TimeInterval+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19471DA81BE4DDEE0067AD85 /* TimeInterval+NSDate.swift */; };
 		19471DAB1BE5C1F90067AD85 /* NotifyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19471DAA1BE5C1F90067AD85 /* NotifyUtils.swift */; };
@@ -106,6 +107,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1905D41C1BEE6297003EC9F8 /* tab_timerlist_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_timerlist_off.png; sourceTree = "<group>"; };
 		19471DA51BE3E4830067AD85 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		19471DA81BE4DDEE0067AD85 /* TimeInterval+NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+NSDate.swift"; sourceTree = "<group>"; };
 		19471DAA1BE5C1F90067AD85 /* NotifyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyUtils.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		19FDAA1F1BE8E67B003B2934 /* Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				1905D41C1BEE6297003EC9F8 /* tab_timerlist_off.png */,
 				19FDAA361BE8E99B003B2934 /* Watch Extension.entitlements */,
 				19FDAA201BE8E67B003B2934 /* TimerListController.swift */,
 				19FDAA221BE8E67B003B2934 /* ExtensionDelegate.swift */,
@@ -448,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19FDAA271BE8E67B003B2934 /* Assets.xcassets in Resources */,
+				1905D41D1BEE6297003EC9F8 /* tab_timerlist_off.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

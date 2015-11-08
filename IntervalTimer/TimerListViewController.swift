@@ -123,21 +123,26 @@ class TimerListViewController: UITableViewController {
         lbl5.textColor = UIColor.blackColor()
         
         let countDown: String = (rowData[Utility.COUNTDOWN] as? String)!
+        let countDownStr: String = (rowData[Utility.COUNTDOWN_STR] as? String)!
         
         // 当日
-        if (countDown == Utility.TODAY) {
+        if (countDownStr == Utility.TODAY) {
             lbl5.textColor = UIColor.redColor()
+            lbl5.text = countDownStr
         }
         // 開始日前
-        else if (countDown == Utility.PREV) {
+        else if (countDownStr == Utility.PREV) {
             lbl5.textColor = UIColor.grayColor()
+            lbl5.text = countDownStr
         }
         // 過日
-        else if (countDown == Utility.TIMEOVER) {
+        else if (countDownStr == Utility.TIMEOVER) {
             lbl5.textColor = UIColor.grayColor()
+            lbl5.text = countDownStr
         }
-        
-        lbl5.text = countDown
+        else {
+            lbl5.text = countDown + countDownStr
+        }
         
         return cell
     }
