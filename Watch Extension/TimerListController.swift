@@ -99,12 +99,12 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
                 self.countDownLbl.setTextColor(UIColor.redColor())
                 self.countDownLbl.setText(countDownState)
             }
-                // 開始日前
+            // 開始日前
             else if (countDownState == self.PREV) {
                 self.countDownLbl.setTextColor(UIColor.grayColor())
                 self.countDownLbl.setText(countDownState)
             }
-                // 過日
+            // 過日
             else if (countDownState == self.TIMEOVER) {
                 self.countDownLbl.setTextColor(UIColor.grayColor())
                 self.countDownLbl.setText(countDownState)

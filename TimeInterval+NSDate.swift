@@ -39,16 +39,21 @@ extension NSDate {
                 return String(DayInterval) + dayPrint
             }
         } else {
-            // とりあえず1daysを返す
+            // とりあえずdaysで返す
             return "1" + dayPrint
 //            if (interval >= 3600) {
-//                HourInterval = interval/3600
-//                return String(HourInterval) + " hours"
+//                //HourInterval = interval/3600
+//                //return String(HourInterval) + " hours"
+//                return "1" + dayPrint
 //            } else if (interval >= 60) {
-//                MinInterval = interval/60
-//                return String(MinInterval) + " minutes"
+//                //MinInterval = interval/60
+//                //return String(MinInterval) + " minutes"
+//                return "1" + dayPrint
+//            } else if (0 > interval % 60) {
+//                //return String(interval) + " sec"
+//                return "1" + dayPrint
 //            } else {
-//                return String(interval) + " sec"
+//                return "0" + dayPrint
 //            }
         }
     }

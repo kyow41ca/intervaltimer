@@ -133,12 +133,12 @@ class TimerListViewController: UITableViewController {
         // 開始日前
         else if (countDownState == Utility.PREV) {
             lbl5.textColor = UIColor.grayColor()
-            lbl5.text = countDownNumStr
+            lbl5.text = countDownState
         }
         // 過日
         else if (countDownState == Utility.TIMEOVER) {
             lbl5.textColor = UIColor.grayColor()
-            lbl5.text = countDownNumStr
+            lbl5.text = countDownState
         }
         else {
             lbl5.text = countDownNumStr + countDownState

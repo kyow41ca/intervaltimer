@@ -55,19 +55,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
         let timer: [String : AnyObject] = delegate.timerlist
         
-        //        let title: String = "tit!!"
-        //        let fromStr: String = "2000/01/01"
-        //        let toStr: String = "2000/01/01"
-        //        let countDown: String = "326"
-        //        let countDownStr: String = " days away"
-        //        var cnt: String = ""
-        //        let percent: Float = 0.75
-        
         if (!(timer["nodata"] as! Bool)) {
             let title = timer[TITLE] as! String
             let fromStr = timer[FROM_STR] as! String
             let toStr = timer[TO_STR] as! String
-            let countDownNum = timer[COUNTDOWN_NUM] as! String
+            var countDownNum = timer[COUNTDOWN_NUM] as! String
             let countDownNumStr = timer[COUNTDOWN_NUM_STR] as! String
             let countDownState = timer[COUNTDOWN_STATE] as! String
             var cnt: String = ""
@@ -75,6 +67,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         
             // 当日
             if (countDownState == self.TODAY) {
+                countDownNum = "0"
                 cnt = countDownState
             }
             // 開始日前
@@ -83,6 +76,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             }
             // 過日
             else if (countDownState == self.TIMEOVER) {
+                countDownNum = "-" + countDownNum
                 cnt = countDownState
             }
             else {
