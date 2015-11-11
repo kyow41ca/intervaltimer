@@ -16,7 +16,7 @@ class NotifyUtils {
         let notification = UILocalNotification()
         notification.fireDate = data.notify
         notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.alertBody = data.title! + "の日だよ"
+        notification.alertBody = data.title!
         notification.alertAction = "OK"
         notification.soundName = UILocalNotificationDefaultSoundName
         notification.userInfo = ["notifyId" : data.id!]

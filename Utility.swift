@@ -8,9 +8,11 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class Utility {
     
+    internal static let ID: String = "id"
     internal static let TITLE: String = "title"
     internal static let FROM: String = "from"
     internal static let TO: String = "to"
@@ -172,6 +174,7 @@ class Utility {
         var rowData: [String : AnyObject] = [:]
         
         // 基本データ変数化
+        let id = data.valueForKeyPath("id") as! String
         let title = data.valueForKeyPath("title") as! String
         let from = data.valueForKeyPath("from") as! NSDate
         let to = data.valueForKeyPath("to") as! NSDate
@@ -179,6 +182,7 @@ class Utility {
         //let repeats = data.valueForKeyPath("repeats") as! NSNumber
         
         // 基本データ
+        rowData[ID] = id
         rowData[TITLE] = title
         //rowData[FROM] = from
         //rowData[TO] = to
@@ -221,6 +225,16 @@ class Utility {
         rowData[PERCENT] = percent
         
         return rowData
+    }
+    
+    //UIntに16進で数値をいれるとUIColorが戻る関数
+    internal static func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
     
 }

@@ -16,7 +16,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="215" id="izh-ut-w9j" userLabel="Cell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="215" id="izh-ut-w9j" userLabel="Cell" customClass="TimerListCell" customModule="IntervalTimer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="215"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="izh-ut-w9j" id="ZwW-J3-1WQ">
@@ -61,7 +61,7 @@
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="37"/>
-                                            <color key="textColor" white="0.098006465517241376" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.0" green="0.52980536528205135" blue="0.50997525760782658" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -164,6 +164,13 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <outlet property="dayLbl" destination="peT-kr-y4e" id="wkF-AR-0mf"/>
+                                    <outlet property="fromLbl" destination="Z70-tK-FRV" id="Dav-ou-rUA"/>
+                                    <outlet property="percentProg" destination="YH6-0C-K9V" id="nb8-jm-aJt"/>
+                                    <outlet property="titleLbl" destination="wtb-K5-5e4" id="z73-Qs-pgR"/>
+                                    <outlet property="toLbl" destination="lss-Hz-xaT" id="b7f-LI-lcJ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -621,7 +628,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Saw-8v-bEN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3421.5" y="324.75"/>
+            <point key="canvasLocation" x="3483" y="174.75"/>
         </scene>
         <!--Timer List-->
         <scene sceneID="BBf-Gm-kKs">
@@ -646,14 +653,14 @@
         <!--Settings-->
         <scene sceneID="aMm-tm-n3b">
             <objects>
-                <tableViewController id="bl2-zw-FRx" sceneMemberID="viewController">
+                <tableViewController id="bl2-zw-FRx" customClass="SettingsController" customModule="IntervalTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="XBI-m8-Mvh">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection id="D37-lX-f3y">
+                            <tableViewSection footerTitle="Apple Watchに設定するタイマーを設定します。" id="D37-lX-f3y">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="D9v-tS-dBl">
                                         <rect key="frame" x="0.0" y="99" width="400" height="44"/>
@@ -661,17 +668,107 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D9v-tS-dBl" id="txf-xv-SlN">
                                             <rect key="frame" x="0.0" y="0.0" width="400" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting Apple Watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYf-uC-pcn">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="MYf-uC-pcn" secondAttribute="bottom" constant="1" id="Bt1-rT-AzU"/>
+                                                <constraint firstItem="MYf-uC-pcn" firstAttribute="top" secondItem="txf-xv-SlN" secondAttribute="topMargin" constant="2" id="Dof-lc-2lp"/>
+                                                <constraint firstItem="MYf-uC-pcn" firstAttribute="leading" secondItem="txf-xv-SlN" secondAttribute="leadingMargin" constant="10" id="cLC-9V-Yxz"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="MYf-uC-pcn"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="Bt1-rT-AzU"/>
+                                                    <exclude reference="Dof-lc-2lp"/>
+                                                    <exclude reference="cLC-9V-Yxz"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="MYf-uC-pcn"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="Bt1-rT-AzU"/>
+                                                    <include reference="Dof-lc-2lp"/>
+                                                    <include reference="cLC-9V-Yxz"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lPL-lz-4lm">
-                                        <rect key="frame" x="0.0" y="143" width="400" height="44"/>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Info" id="MyM-nb-9IU">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zme-WQ-wl3">
+                                        <rect key="frame" x="0.0" y="210" width="400" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lPL-lz-4lm" id="sfQ-UP-1ud">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zme-WQ-wl3" id="5KI-8L-pVL">
                                             <rect key="frame" x="0.0" y="0.0" width="400" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXa-tY-apw">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L2X-0U-mls">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstItem="L2X-0U-mls" firstAttribute="top" secondItem="5KI-8L-pVL" secondAttribute="topMargin" constant="2" id="AZH-9F-sGL"/>
+                                                <constraint firstItem="fXa-tY-apw" firstAttribute="top" secondItem="5KI-8L-pVL" secondAttribute="topMargin" constant="2" id="Esg-rR-CY1"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="L2X-0U-mls" secondAttribute="trailing" constant="5" id="U5Q-Ms-Dip"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fXa-tY-apw" secondAttribute="bottom" constant="1" id="UzP-Oq-ChA"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="L2X-0U-mls" secondAttribute="bottom" constant="1" id="zB4-ur-910"/>
+                                                <constraint firstItem="fXa-tY-apw" firstAttribute="leading" secondItem="5KI-8L-pVL" secondAttribute="leadingMargin" constant="10" id="zBh-xP-81A"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="fXa-tY-apw"/>
+                                                    <exclude reference="L2X-0U-mls"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="AZH-9F-sGL"/>
+                                                    <exclude reference="U5Q-Ms-Dip"/>
+                                                    <exclude reference="zB4-ur-910"/>
+                                                    <exclude reference="Esg-rR-CY1"/>
+                                                    <exclude reference="UzP-Oq-ChA"/>
+                                                    <exclude reference="zBh-xP-81A"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="fXa-tY-apw"/>
+                                                    <include reference="L2X-0U-mls"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="AZH-9F-sGL"/>
+                                                    <include reference="U5Q-Ms-Dip"/>
+                                                    <include reference="zB4-ur-910"/>
+                                                    <include reference="Esg-rR-CY1"/>
+                                                    <include reference="UzP-Oq-ChA"/>
+                                                    <include reference="zBh-xP-81A"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
@@ -686,10 +783,90 @@
                     <navigationItem key="navigationItem" title="Settings" id="1Nm-7n-fcg"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="800"/>
+                    <connections>
+                        <outlet property="appVerLbl" destination="L2X-0U-mls" id="iar-Xz-Mbk"/>
+                        <segue destination="apy-DS-iIO" kind="presentation" identifier="toSettingAppleWatch" id="IKd-8v-p5O"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="INx-WW-UZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1974" y="1014"/>
+        </scene>
+        <!--Setting Apple Watch-->
+        <scene sceneID="y2p-vM-shR">
+            <objects>
+                <tableViewController id="msv-h9-8TD" customClass="SettiingAppleWatchController" customModule="IntervalTimer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ZRj-64-gOC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MyCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="HGw-l3-Ne6" customClass="WatchSettingListCell" customModule="IntervalTimer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HGw-l3-Ne6" id="gMr-7o-G3t">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIn-6P-NWW">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="mIn-6P-NWW" firstAttribute="top" secondItem="gMr-7o-G3t" secondAttribute="topMargin" constant="3" id="5Dr-RU-ZF3"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mIn-6P-NWW" secondAttribute="bottom" constant="3" id="df0-RM-IyY"/>
+                                        <constraint firstItem="mIn-6P-NWW" firstAttribute="leading" secondItem="gMr-7o-G3t" secondAttribute="leadingMargin" constant="10" id="oE1-ox-HPJ"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="mIn-6P-NWW"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="5Dr-RU-ZF3"/>
+                                            <exclude reference="df0-RM-IyY"/>
+                                            <exclude reference="oE1-ox-HPJ"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="mIn-6P-NWW"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="5Dr-RU-ZF3"/>
+                                            <include reference="df0-RM-IyY"/>
+                                            <include reference="oE1-ox-HPJ"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="titleLbl" destination="mIn-6P-NWW" id="kcm-kS-ebt"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="msv-h9-8TD" id="gRO-6E-qck"/>
+                            <outlet property="delegate" destination="msv-h9-8TD" id="1MU-w0-hjx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Setting Apple Watch" id="rZ9-dn-X3J">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Qcn-pe-3sH">
+                            <connections>
+                                <action selector="closeModalDialog:" destination="msv-h9-8TD" id="8k5-BU-TDH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IPr-hy-PA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3483" y="1014"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Gw7-UD-Ogw">
@@ -748,6 +925,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PYb-PH-TwJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1267.5" y="1014"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wAt-IA-NuS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="apy-DS-iIO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jvd-Ti-qR7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="msv-h9-8TD" kind="relationship" relationship="rootViewController" id="0sn-um-jG9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kug-NT-D6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2674.5" y="1014"/>
         </scene>
     </scenes>
     <resources>

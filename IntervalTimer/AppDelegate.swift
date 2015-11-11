@@ -15,15 +15,37 @@ import WatchConnectivity
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     var window: UIWindow?
+    
+    // NSUserDefaults のインスタンス
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    
+    var watchViewID: String = ""
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        let types : UIUserNotificationType =
-        [UIUserNotificationType.Badge,
-            UIUserNotificationType.Alert,
-            UIUserNotificationType.Sound]
-        let settins : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settins)
+        // ２回目以降の起動時
+        if (userDefaults.boolForKey("FirstLaunch"))
+        {
+            // 値を読み込む
+            self.watchViewID = userDefaults.objectForKey("WatchViewID") as! String
+        }
+        // 初回起動時
+        else
+        {
+            // 初回起動
+            userDefaults.setBool(true, forKey: "FirstLaunch")
+            userDefaults.synchronize()
+            
+            // Apple Watch表示フラグの初期値をセットする
+            userDefaults.registerDefaults(["WatchViewID" : ""])
+            
+            // 通知許可設定を行う
+            let types : UIUserNotificationType =
+            [UIUserNotificationType.Badge,
+                UIUserNotificationType.Alert,
+                UIUserNotificationType.Sound]
+            let settins : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(settins)
+        }
         
         if (WCSession.isSupported()) {
             let session = WCSession.defaultSession()
@@ -35,11 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        let alert = UIAlertView()
-        alert.title = "受け取りました";
-        alert.message = notification.alertBody;
-        alert.addButtonWithTitle(notification.alertAction!);
-        alert.show();
+//        let alert = UIAlertView()
+//        alert.title = "受け取りました";
+//        alert.message = notification.alertBody;
+//        alert.addButtonWithTitle(notification.alertAction!);
+//        alert.show();
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -67,10 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
     
     internal func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-        // CoreData呼び出し
+        // Apple Watch表示用データのIDを取得する
+        // IDを元にApple Watch表示用データを呼び出し
         let context : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         let freg = NSFetchRequest(entityName: "TimerEntity")
-        freg.sortDescriptors = [NSSortDescriptor(key: "to", ascending: true)]
+        freg.predicate = NSPredicate(format: "id = %@", self.watchViewID)
         
         // セルのデータを全行読み込む
         var timerlist: Array<AnyObject> = []

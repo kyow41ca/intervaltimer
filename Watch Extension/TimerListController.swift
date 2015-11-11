@@ -101,7 +101,7 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
             }
             // 開始日前
             else if (countDownState == self.PREV) {
-                self.countDownLbl.setTextColor(UIColor.grayColor())
+                self.countDownLbl.setTextColor(UIColor.greenColor())
                 self.countDownLbl.setText(countDownState)
             }
             // 過日
@@ -110,7 +110,7 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
                 self.countDownLbl.setText(countDownState)
             }
             else {
-                self.countDownLbl.setTextColor(UIColor.whiteColor())
+                self.countDownLbl.setTextColor(UIColor.greenColor())
                 self.countDownLbl.setText(countDownNumStr + countDownState)
             }
             

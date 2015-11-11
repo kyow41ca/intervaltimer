@@ -8,9 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		1905D41D1BEE6297003EC9F8 /* tab_timerlist_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 1905D41C1BEE6297003EC9F8 /* tab_timerlist_off.png */; };
+		19226E8A1BF3871A00218D21 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19226E891BF3871A00218D21 /* iAd.framework */; };
+		19455D941BF0E23E0031E937 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19455D931BF0E23E0031E937 /* SettingsController.swift */; };
+		19455D961BF0E5920031E937 /* SettiingAppleWatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19455D951BF0E5920031E937 /* SettiingAppleWatchController.swift */; };
 		19471DA61BE3E4830067AD85 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19471DA51BE3E4830067AD85 /* Utility.swift */; };
 		19471DA91BE4DDEE0067AD85 /* TimeInterval+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19471DA81BE4DDEE0067AD85 /* TimeInterval+NSDate.swift */; };
 		19471DAB1BE5C1F90067AD85 /* NotifyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19471DAA1BE5C1F90067AD85 /* NotifyUtils.swift */; };
+		1979961A1BF39B5300F24083 /* TimerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197996191BF39B5300F24083 /* TimerList.swift */; };
+		1979961C1BF39C5200F24083 /* TimerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979961B1BF39C5200F24083 /* TimerListCell.swift */; };
+		1979961E1BF3A42D00F24083 /* WatchSettingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979961D1BF3A42D00F24083 /* WatchSettingList.swift */; };
+		197996201BF3A47700F24083 /* WatchSettingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979961F1BF3A47700F24083 /* WatchSettingListCell.swift */; };
 		199448C71BDCEEE600F5E45C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448C61BDCEEE600F5E45C /* AppDelegate.swift */; };
 		199448C91BDCEEE600F5E45C /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448C81BDCEEE600F5E45C /* TimerListViewController.swift */; };
 		199448CC1BDCEEE600F5E45C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 199448CA1BDCEEE600F5E45C /* Main.storyboard */; };
@@ -108,10 +115,17 @@
 
 /* Begin PBXFileReference section */
 		1905D41C1BEE6297003EC9F8 /* tab_timerlist_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_timerlist_off.png; sourceTree = "<group>"; };
+		19226E891BF3871A00218D21 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		19455D931BF0E23E0031E937 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		19455D951BF0E5920031E937 /* SettiingAppleWatchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettiingAppleWatchController.swift; sourceTree = "<group>"; };
 		19471DA51BE3E4830067AD85 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		19471DA81BE4DDEE0067AD85 /* TimeInterval+NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+NSDate.swift"; sourceTree = "<group>"; };
 		19471DAA1BE5C1F90067AD85 /* NotifyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyUtils.swift; sourceTree = "<group>"; };
 		1949B32A1BEA4D5400D730F3 /* libIntervalTimerKit2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIntervalTimerKit2.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		197996191BF39B5300F24083 /* TimerList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerList.swift; sourceTree = "<group>"; };
+		1979961B1BF39C5200F24083 /* TimerListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListCell.swift; sourceTree = "<group>"; };
+		1979961D1BF3A42D00F24083 /* WatchSettingList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSettingList.swift; sourceTree = "<group>"; };
+		1979961F1BF3A47700F24083 /* WatchSettingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSettingListCell.swift; sourceTree = "<group>"; };
 		199448C31BDCEEE600F5E45C /* IntervalTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntervalTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		199448C61BDCEEE600F5E45C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		199448C81BDCEEE600F5E45C /* TimerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19226E8A1BF3871A00218D21 /* iAd.framework in Frameworks */,
 				19FDAA0B1BE8E4CF003B2934 /* WatchConnectivity.framework in Frameworks */,
 				19FDAA461BE8F4F1003B2934 /* IntervalTimerKit.framework in Frameworks */,
 				19FDAA0C1BE8E4CF003B2934 /* WatchKit.framework in Frameworks */,
@@ -180,6 +195,7 @@
 		199448BA1BDCEEE600F5E45C = {
 			isa = PBXGroup;
 			children = (
+				19226E891BF3871A00218D21 /* iAd.framework */,
 				19471DA51BE3E4830067AD85 /* Utility.swift */,
 				19471DA81BE4DDEE0067AD85 /* TimeInterval+NSDate.swift */,
 				19471DAA1BE5C1F90067AD85 /* NotifyUtils.swift */,
@@ -212,6 +228,10 @@
 				19FDAA341BE8E848003B2934 /* IntervalTimer.entitlements */,
 				199448C61BDCEEE600F5E45C /* AppDelegate.swift */,
 				199448C81BDCEEE600F5E45C /* TimerListViewController.swift */,
+				197996191BF39B5300F24083 /* TimerList.swift */,
+				1979961D1BF3A42D00F24083 /* WatchSettingList.swift */,
+				1979961B1BF39C5200F24083 /* TimerListCell.swift */,
+				1979961F1BF3A47700F24083 /* WatchSettingListCell.swift */,
 				199448CA1BDCEEE600F5E45C /* Main.storyboard */,
 				199448DD1BDCFC9900F5E45C /* TimerEditViewController.swift */,
 				199448D01BDCEEE600F5E45C /* Assets.xcassets */,
@@ -219,6 +239,8 @@
 				199448CD1BDCEEE600F5E45C /* IntervalTimer.xcdatamodeld */,
 				199448DF1BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift */,
 				199448E01BDCFEF500F5E45C /* TimerEntity.swift */,
+				19455D931BF0E23E0031E937 /* SettingsController.swift */,
+				19455D951BF0E5920031E937 /* SettiingAppleWatchController.swift */,
 			);
 			path = IntervalTimer;
 			sourceTree = "<group>";
@@ -476,12 +498,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197996201BF3A47700F24083 /* WatchSettingListCell.swift in Sources */,
 				19471DAB1BE5C1F90067AD85 /* NotifyUtils.swift in Sources */,
 				19471DA61BE3E4830067AD85 /* Utility.swift in Sources */,
 				199448CF1BDCEEE600F5E45C /* IntervalTimer.xcdatamodeld in Sources */,
+				1979961A1BF39B5300F24083 /* TimerList.swift in Sources */,
+				1979961E1BF3A42D00F24083 /* WatchSettingList.swift in Sources */,
 				19471DA91BE4DDEE0067AD85 /* TimeInterval+NSDate.swift in Sources */,
+				19455D961BF0E5920031E937 /* SettiingAppleWatchController.swift in Sources */,
+				19455D941BF0E23E0031E937 /* SettingsController.swift in Sources */,
 				199448C91BDCEEE600F5E45C /* TimerListViewController.swift in Sources */,
 				199448DE1BDCFC9900F5E45C /* TimerEditViewController.swift in Sources */,
+				1979961C1BF39C5200F24083 /* TimerListCell.swift in Sources */,
 				199448C71BDCEEE600F5E45C /* AppDelegate.swift in Sources */,
 				199448E21BDCFEF500F5E45C /* TimerEntity.swift in Sources */,
 				199448E11BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift in Sources */,
@@ -612,7 +640,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -650,7 +678,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -791,6 +819,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.yuki.yoshinaga.IntervalTimerKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -821,6 +850,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.yuki.yoshinaga.IntervalTimerKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";

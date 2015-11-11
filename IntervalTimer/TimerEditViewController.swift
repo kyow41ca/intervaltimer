@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import IntervalTimerKit
+import iAd
 
 class TimerEditViewController: UITableViewController, UITextFieldDelegate {
     
@@ -42,7 +43,7 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         // リストからもらった編集データがNULLの場合＝新規登録
         if (editData == nil) {
             // ナビゲーションバーのタイトルを設定する
-            self.navigationItem.title = "タイマー追加"
+            self.navigationItem.title = "Add Timer"
             
             // FromとToのラベルのデフォルト（本日）を設定する
             fromLabel.text = format(NSDate(), style: "yyyy/MM/dd")
@@ -58,7 +59,7 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         // リストからもらった編集データがNULLでない場合＝編集
         else {
             // ナビゲーションバーのタイトルを設定する
-            self.navigationItem.title = "タイマー編集"
+            self.navigationItem.title = "Edit Timer"
             
             // 取得したタイトルをセットする
             titleField.text = editData.valueForKeyPath("title") as? String
@@ -89,6 +90,9 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
             // 取得したくり返しフラグをセットする
             //repeatsSwitch.on = editData.valueForKeyPath("repeats") as! Bool
         }
+        
+        // iAd(バナー)の自動表示
+        self.canDisplayBannerAds = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -209,7 +213,7 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         let alertController = UIAlertController(title: "保存完了", message: "タイマーの保存が完了しました。", preferredStyle: .Alert)
         
         // OKボタンの設定（押した時にモーダルを閉じる）
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in self.closeModalDialog()}))
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in self.closeModalDialog() }))
         
         // ダイアログを画面に表示する
         presentViewController(alertController, animated: true, completion: nil)

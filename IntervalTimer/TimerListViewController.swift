@@ -9,15 +9,17 @@
 import UIKit
 import CoreData
 import IntervalTimerKit
+import iAd
 
 class TimerListViewController: UITableViewController {
     
     // Tableで使用する配列を設定する.
-    var timerlist:Array<AnyObject>=[]
+    var timerlist:Array<AnyObject> = []
+    var timerLists = [TimerList]()
     
     // 編集データを編集画面に持っていくための箱
     var editData : NSManagedObject!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -49,6 +51,9 @@ class TimerListViewController: UITableViewController {
         
         // テーブルビューを再読込みする
         tableView.reloadData()
+        
+        // iAd(バナー)の自動表示
+        self.canDisplayBannerAds = true
     }
     
     // 編集ボタン押下時処理
@@ -97,54 +102,61 @@ class TimerListViewController: UITableViewController {
     // セルの値を設定
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // セルの情報を取得する
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-
+        let cell: TimerListCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! TimerListCell
+        
         // CoreDataから取得したデータのうち、今の行を読み込む
         let rowData: [String : AnyObject] = Utility.rowDataFormat(timerlist[indexPath.row] as! NSManagedObject)
 
+        // カスタムセルにデータをセットする
+        setTimerListData(rowData)
+        cell.setCell(timerLists[indexPath.row])
+        
+        return cell
+    }
+    
+    func setTimerListData (rowData: [String : AnyObject]) {
         // タイトル
-        let lbl1 = tableView.viewWithTag(1) as! UILabel
-        lbl1.text = rowData[Utility.TITLE] as? String
-
+        let title: String = rowData[Utility.TITLE] as! String
+        
         // From
-        let lbl2 = tableView.viewWithTag(2) as! UILabel
-        lbl2.text = rowData[Utility.FROM_STR] as? String
+        let from: String = rowData[Utility.FROM_STR] as! String
         
         // To
-        let lbl3 = tableView.viewWithTag(3) as! UILabel
-        lbl3.text = rowData[Utility.TO_STR] as? String
+        let to: String = rowData[Utility.TO_STR] as! String
         
         // 進捗バー
-        let prog4 = tableView.viewWithTag(4) as! UIProgressView
-        prog4.progress = rowData[Utility.PERCENT] as! Float
+        let percent: Float = rowData[Utility.PERCENT] as! Float
         
         // 残日数
-        let lbl5 = tableView.viewWithTag(5) as! UILabel
-        lbl5.textColor = UIColor.blackColor()
+        var day: String = ""
+        var dayColor: UIColor = Utility.UIColorFromRGB(0x008782)
         
         let countDownNumStr: String = (rowData[Utility.COUNTDOWN_NUM_STR] as? String)!
         let countDownState: String = (rowData[Utility.COUNTDOWN_STATE] as? String)!
         
         // 当日
         if (countDownState == Utility.TODAY) {
-            lbl5.textColor = UIColor.redColor()
-            lbl5.text = countDownState
+            day = countDownState
+            dayColor = UIColor.redColor()
         }
         // 開始日前
         else if (countDownState == Utility.PREV) {
-            lbl5.textColor = UIColor.grayColor()
-            lbl5.text = countDownState
+            day = countDownState
+            dayColor = Utility.UIColorFromRGB(0x008782)
         }
         // 過日
         else if (countDownState == Utility.TIMEOVER) {
-            lbl5.textColor = UIColor.grayColor()
-            lbl5.text = countDownState
+            day = countDownState
+            dayColor = UIColor.grayColor()
         }
         else {
-            lbl5.text = countDownNumStr + countDownState
+            day = countDownNumStr + countDownState
+            dayColor = Utility.UIColorFromRGB(0x008782)
         }
+
+        let timer = TimerList(title: title, day: day, dayColor: dayColor, from: from, to: to, percent: percent)
         
-        return cell
+        timerLists.append(timer)
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

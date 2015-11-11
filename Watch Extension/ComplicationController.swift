@@ -155,16 +155,16 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             let templateML = CLKComplicationTemplateModularLargeStandardBody()
             
             templateML.headerImageProvider = CLKImageProvider(onePieceImage: timerImg1!)
-            templateML.headerTextProvider = CLKSimpleTextProvider(text: "TimerTitle")
-            templateML.body1TextProvider = CLKSimpleTextProvider(text: "CountDown")
-            templateML.body2TextProvider = CLKSimpleTextProvider(text: "ToDate")
+            templateML.headerTextProvider = CLKSimpleTextProvider(text: "LD Timer")
+            templateML.body1TextProvider = CLKSimpleTextProvider(text: "SET")
+            templateML.body2TextProvider = CLKSimpleTextProvider(text: "-")
             
             handler(templateML)
         }
         else if (complication.family == .ModularSmall) {
             let templateMS = CLKComplicationTemplateModularSmallRingText()
             
-            templateMS.textProvider = CLKSimpleTextProvider(text: "999")
+            templateMS.textProvider = CLKSimpleTextProvider(text: "SET")
             templateMS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
             templateMS.fillFraction = 0.5 as Float
             
@@ -173,7 +173,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         else if (complication.family == .CircularSmall) {
             let templateCS = CLKComplicationTemplateCircularSmallRingText()
             
-            templateCS.textProvider = CLKSimpleTextProvider(text: "999")
+            templateCS.textProvider = CLKSimpleTextProvider(text: "SET")
             templateCS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
             templateCS.fillFraction = 0.5 as Float
             
@@ -184,7 +184,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             let templateUL = CLKComplicationTemplateUtilitarianLargeFlat()
             
             templateUL.imageProvider = CLKImageProvider(onePieceImage: timerImg2!)
-            templateUL.textProvider = CLKSimpleTextProvider(text: "TimerTitle")
+            templateUL.textProvider = CLKSimpleTextProvider(text: "SET")
             
             handler(templateUL)
         }
@@ -193,7 +193,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             let templateUS = CLKComplicationTemplateUtilitarianSmallFlat()
             
             templateUS.imageProvider = CLKImageProvider(onePieceImage: timerImg3!)
-            templateUS.textProvider = CLKSimpleTextProvider(text: "999")
+            templateUS.textProvider = CLKSimpleTextProvider(text: "SET")
             
             handler(templateUS)
         }
