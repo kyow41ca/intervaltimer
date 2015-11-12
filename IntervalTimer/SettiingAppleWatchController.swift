@@ -40,9 +40,6 @@ class SettiingAppleWatchController : UITableViewController {
         
         // テーブルビューを再読込みする
         tableView.reloadData()
-        
-        // iAd(バナー)の自動表示
-        self.canDisplayBannerAds = true
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

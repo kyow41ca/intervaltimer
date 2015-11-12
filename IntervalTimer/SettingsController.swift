@@ -18,12 +18,13 @@ class SettingsController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         appVerLbl.text = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String
-        
-        // iAd(バナー)の自動表示
-        self.canDisplayBannerAds = true
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+        
+        // iAd(バナー)の自動表示
+        self.canDisplayBannerAds = true
     }
     
     override func didReceiveMemoryWarning() {

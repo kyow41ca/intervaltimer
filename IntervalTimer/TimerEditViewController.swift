@@ -90,9 +90,6 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
             // 取得したくり返しフラグをセットする
             //repeatsSwitch.on = editData.valueForKeyPath("repeats") as! Bool
         }
-        
-        // iAd(バナー)の自動表示
-        self.canDisplayBannerAds = true
     }
 
     override func didReceiveMemoryWarning() {

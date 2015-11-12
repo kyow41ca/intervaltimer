@@ -24,6 +24,13 @@ class TimerListViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+        
+        // iAd(バナー)の自動表示
+        self.canDisplayBannerAds = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -51,9 +58,6 @@ class TimerListViewController: UITableViewController {
         
         // テーブルビューを再読込みする
         tableView.reloadData()
-        
-        // iAd(バナー)の自動表示
-        self.canDisplayBannerAds = true
     }
     
     // 編集ボタン押下時処理
