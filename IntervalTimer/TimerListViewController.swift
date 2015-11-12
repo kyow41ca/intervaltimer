@@ -14,8 +14,8 @@ import iAd
 class TimerListViewController: UITableViewController {
     
     // Tableで使用する配列を設定する.
-    var timerlist:Array<AnyObject> = []
-    var timerLists = [TimerList]()
+    var timerlist: Array<AnyObject> = []
+    var timerLists: [TimerList] = []
     
     // 編集データを編集画面に持っていくための箱
     var editData : NSManagedObject!
@@ -56,6 +56,12 @@ class TimerListViewController: UITableViewController {
             print(error)
         }
         
+        // データをセットする
+        timerLists = []
+        for (var i: Int = 0; i < timerlist.count; i++) {
+            setTimerListData(Utility.rowDataFormat(timerlist[i] as! NSManagedObject))
+        }
+        
         // テーブルビューを再読込みする
         tableView.reloadData()
     }
@@ -82,11 +88,12 @@ class TimerListViewController: UITableViewController {
         // 編集モードの時に選択された行のインデックスを取得して、その行のデータを削除する
         if editingStyle == .Delete {
             // idを取得しておく
-            let notifyId = timerlist[indexPath.row].valueForKeyPath("id") as! String
+            let notifyId = timerLists[indexPath.row].id
             
             // 削除する
             context.deleteObject(timerlist[indexPath.row] as! NSManagedObject)
             timerlist.removeAtIndex(indexPath.row)
+            timerLists.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             
             // 通知センターもキャンセルする
@@ -100,25 +107,22 @@ class TimerListViewController: UITableViewController {
     
     // セルの行数を指定
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timerlist.count
+        return timerLists.count
     }
     
     // セルの値を設定
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // セルの情報を取得する
         let cell: TimerListCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! TimerListCell
-        
-        // CoreDataから取得したデータのうち、今の行を読み込む
-        let rowData: [String : AnyObject] = Utility.rowDataFormat(timerlist[indexPath.row] as! NSManagedObject)
-
-        // カスタムセルにデータをセットする
-        setTimerListData(rowData)
         cell.setCell(timerLists[indexPath.row])
         
         return cell
     }
     
     func setTimerListData (rowData: [String : AnyObject]) {
+        // ID
+        let id: String = rowData[Utility.ID] as! String
+        
         // タイトル
         let title: String = rowData[Utility.TITLE] as! String
         
@@ -158,7 +162,7 @@ class TimerListViewController: UITableViewController {
             dayColor = Utility.UIColorFromRGB(0x008782)
         }
 
-        let timer = TimerList(title: title, day: day, dayColor: dayColor, from: from, to: to, percent: percent)
+        let timer = TimerList(id: id, title: title, day: day, dayColor: dayColor, from: from, to: to, percent: percent)
         
         timerLists.append(timer)
     }

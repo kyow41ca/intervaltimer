@@ -21,6 +21,9 @@ class SettiingAppleWatchController : UITableViewController {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
+    // セルを保持しておく
+    var currentCell: UITableViewCell = UITableViewCell()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -43,6 +46,9 @@ class SettiingAppleWatchController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // 今のセルのチェックを外す
+        currentCell.accessoryType = UITableViewCellAccessoryType.None
+        
         // チェックをつける
         let cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         cell.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -93,7 +99,8 @@ class SettiingAppleWatchController : UITableViewController {
         let id: String = rowData[Utility.ID] as! String
 
         if (id == appDel.watchViewID) {
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            currentCell = cell
+            currentCell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
         
         return cell
