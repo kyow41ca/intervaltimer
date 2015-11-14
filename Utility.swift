@@ -184,8 +184,8 @@ class Utility {
         // 基本データ
         rowData[ID] = id
         rowData[TITLE] = title
-        //rowData[FROM] = from
-        //rowData[TO] = to
+        rowData[FROM] = from
+        rowData[TO] = to
         //rowData = ["notify" : notify]
         //rowData = ["repeats" : repeats]
         
@@ -194,7 +194,7 @@ class Utility {
         rowData[TO_STR] = Utility.dateString(to, format: "yyyy/MM/dd")
         
         // 残日数文字
-        rowData[COUNTDOWN_NUM] = to.stringForTimeIntervalSinceCreated(NSDate(), isDayPrint: false)
+        rowData[COUNTDOWN_NUM] = Utility.dateDiff(Utility.Interval.Day, date1: Utility.cutTime(NSDate()), date2: to)
         rowData[COUNTDOWN_NUM_STR] = to.stringForTimeIntervalSinceCreated()
         var countDownState: String = ""
         
