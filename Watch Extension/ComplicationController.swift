@@ -53,6 +53,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         // Call the handler with the current timeline entry
         
         let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
+        
+        delegate.loadData(0)
+        
         let timer: [String : AnyObject] = delegate.timerlist
         
         if (!(timer["nodata"] as! Bool)) {
@@ -121,6 +124,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         
         // データを取得する
         let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
+        
+        delegate.loadData(0)
+        
         let timer: [String : AnyObject] = delegate.timerlist
         
         if (!(timer["nodata"] as! Bool)) {
@@ -139,18 +145,18 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             var day: Int = countDownNum
             var dayStrs: String = ""
             
-            // 進捗バーのパーセンテージ
-            let fromToSub: Double = to.timeIntervalSinceDate(from)
-            let fromNowSub: Double = self.cutTime(NSDate()).timeIntervalSinceDate(from)
-            let percent: Float = 1.0 - Float(fromNowSub / fromToSub)
-            
             for _ in 1...2 {
                 // 今日の日付からnumを引く＝その日の残り日数
                 day = day - 1
                 
+                // 進捗バーのパーセンテージ
+                let fromToSub: Double = to.timeIntervalSinceDate(from)
+                let fromNowSub: Double = nextDate.timeIntervalSinceDate(from)
+                let percent: Float = 1.0 - Float(fromNowSub / fromToSub)
+                
                 // 次の文言を決定する
                 if (0 < day) {
-                    if (0 > NSDate().timeIntervalSinceDate(from)) {
+                    if (0 > nextDate.timeIntervalSinceDate(from)) {
                         dayStrs = self.PREV
                     }
                     else {
