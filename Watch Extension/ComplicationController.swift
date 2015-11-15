@@ -39,7 +39,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     }
     
     func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
-        let time = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * 60 * 24 * 7))
+        let time = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * 60 * 24 * 30))
         handler(time)
     }
     
@@ -139,7 +139,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             var day: Int = countDownNum
             var dayStrs: String = ""
             
-            for _ in 1...7 {
+            for _ in 1...30 {
                 // 今日の日付からnumを引く＝その日の残り日数
                 day = day - 1
                 
@@ -296,7 +296,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     
     func getNextRequestedUpdateDateWithHandler(handler: (NSDate?) -> Void) {
         // Call the handler with the date when you would next like to be given the opportunity to update your complication content
-        let nextDate = NSDate(timeIntervalSinceNow: 1 * 60 * 60)
+        let nextDate = NSDate(timeIntervalSinceNow: 60 * 60 * 24 * 1)
         handler(nextDate);
     }
     
