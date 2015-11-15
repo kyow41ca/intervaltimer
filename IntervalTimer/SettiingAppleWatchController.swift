@@ -69,7 +69,11 @@ class SettiingAppleWatchController : UITableViewController {
         appDel.watchViewID = id
         
         // ダイアログ表示準備
-        let alertController = UIAlertController(title: "設定完了", message: title + "のApple Watchの表示設定が完了しました。", preferredStyle: .Alert)
+        let alertController = UIAlertController(
+            title: NSLocalizedString("settingWatchViewSaveDialogTitle", comment: ""),
+            message: NSLocalizedString("settingWatchViewSaveDialogMessage", comment: ""),
+            preferredStyle: .Alert
+        )
         
         // OKボタンの設定（押した時にモーダルを閉じる）
         alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in self.closeModalDialog() }))

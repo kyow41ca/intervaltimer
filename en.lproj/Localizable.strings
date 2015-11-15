@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  IntervalTimer
+
+  Created by YoshinagaYuuki on 2015/11/15.
+  Copyright © 2015年 Yuki Yoshinaga. All rights reserved.
+*/
+
+// TimerEditViewController・ナビゲーションバー名
+"editViewNaviAdd" = "Add Timer";
+"editViewNaviEdit" = "Edit Timer";
+
+// TimerEditViewController・保存ボタン押下時ダイアログ表示名
+"editViewSaveDialogTitle" = "Info";
+"editViewSaveDialogMessage" = "Timer of the save has been completed.";
+
+// SettiingAppleWatch・リストセル押下時ダイアログ表示名
+"settingWatchViewSaveDialogTitle" = "Info";
+"settingWatchViewSaveDialogMessage" = "Apple Watch the display setting is now complete.";

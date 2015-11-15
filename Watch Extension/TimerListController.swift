@@ -1,5 +1,5 @@
 //
-//  InterfaceController.swift
+//  TimerListController.swift
 //  Watch Extension
 //
 //  Created by YoshinagaYuuki on 2015/11/03.
@@ -85,7 +85,7 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
         if (timer["nodata"] as! Bool) {
             self.loadGroup.setHidden(false)
             self.mainGroup.setHidden(true)
-            self.errLbl.setText("iPhoneアプリでタイマーをセットしてください。")
+            self.errLbl.setText(NSLocalizedString("timerListViewCaution", comment: ""))
         } else {
             self.mainGroup.setHidden(false)
             self.loadGroup.setHidden(true)

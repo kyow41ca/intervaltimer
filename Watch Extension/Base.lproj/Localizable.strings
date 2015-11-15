@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  IntervalTimer
+
+  Created by YoshinagaYuuki on 2015/11/15.
+  Copyright © 2015年 Yuki Yoshinaga. All rights reserved.
+*/
+
+// TimerListController・Apple Watch設定の注意文言
+"timerListViewCaution" = "Please set the timer on the iPhone app.";

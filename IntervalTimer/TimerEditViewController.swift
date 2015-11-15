@@ -43,7 +43,7 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         // リストからもらった編集データがNULLの場合＝新規登録
         if (editData == nil) {
             // ナビゲーションバーのタイトルを設定する
-            self.navigationItem.title = "Add Timer"
+            self.navigationItem.title = NSLocalizedString("editViewNaviAdd", comment: "")
             
             // FromとToのラベルのデフォルト（本日）を設定する
             fromLabel.text = format(NSDate(), style: "yyyy/MM/dd")
@@ -59,7 +59,7 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         // リストからもらった編集データがNULLでない場合＝編集
         else {
             // ナビゲーションバーのタイトルを設定する
-            self.navigationItem.title = "Edit Timer"
+            self.navigationItem.title = NSLocalizedString("editViewNaviEdit", comment: "")
             
             // 取得したタイトルをセットする
             titleField.text = editData.valueForKeyPath("title") as? String
@@ -207,7 +207,11 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         }
         
         // ダイアログ表示準備
-        let alertController = UIAlertController(title: "保存完了", message: "タイマーの保存が完了しました。", preferredStyle: .Alert)
+        let alertController = UIAlertController(
+            title: NSLocalizedString("editViewSaveDialogTitle", comment: ""),
+            message: NSLocalizedString("editViewSaveDialogMessage", comment: ""),
+            preferredStyle: .Alert
+        )
         
         // OKボタンの設定（押した時にモーダルを閉じる）
         alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in self.closeModalDialog() }))

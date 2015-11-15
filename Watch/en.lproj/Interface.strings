@@ -1,0 +1,24 @@
+
+/* Class = "WKInterfaceLabel"; text = "Title"; ObjectID = "1P5-Sd-FX3"; */
+"1P5-Sd-FX3.text" = "Title";
+
+/* Class = "WKInterfaceLabel"; text = "〜"; ObjectID = "66M-qZ-qwi"; */
+"66M-qZ-qwi.text" = "〜";
+
+/* Class = "WKInterfaceLabel"; text = "is"; ObjectID = "HWU-nq-4kI"; */
+"HWU-nq-4kI.text" = "is";
+
+/* Class = "WKInterfaceLabel"; text = "2000/01/01"; ObjectID = "Hc2-J5-tod"; */
+"Hc2-J5-tod.text" = "2000/01/01";
+
+/* Class = "WKInterfaceLabel"; text = "999 days away"; ObjectID = "LXY-xN-0AA"; */
+"LXY-xN-0AA.text" = "999 days away";
+
+/* Class = "WKInterfaceLabel"; text = "Now Loading..."; ObjectID = "fLS-gG-XPR"; */
+"fLS-gG-XPR.text" = "Now Loading...";
+
+/* Class = "WKInterfaceLabel"; text = "2000/01/01"; ObjectID = "qIX-Eh-tp4"; */
+"qIX-Eh-tp4.text" = "2000/01/01";
+
+/* Class = "WKInterfaceMenuItem"; title = "Reload"; ObjectID = "tRq-Mu-lc6"; */
+"tRq-Mu-lc6.title" = "Reload";

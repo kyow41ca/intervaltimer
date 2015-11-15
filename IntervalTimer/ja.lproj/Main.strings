@@ -1,0 +1,72 @@
+
+/* Class = "UINavigationItem"; title = "Add Timer"; ObjectID = "031-2O-OoQ"; */
+"031-2O-OoQ.title" = "タイマー追加";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "1Nm-7n-fcg"; */
+"1Nm-7n-fcg.title" = "設定";
+
+/* Class = "UILabel"; text = "12:00"; ObjectID = "1c5-Hj-wnp"; */
+"1c5-Hj-wnp.text" = "12:00";
+
+/* Class = "UILabel"; text = "Start date"; ObjectID = "9vR-Ju-jH6"; */
+"9vR-Ju-jH6.text" = "開始日";
+
+/* Class = "UITableViewSection"; footerTitle = "You set the timer to be set in the Apple Watch."; ObjectID = "D37-lX-f3y"; */
+"D37-lX-f3y.footerTitle" = "Apple Watchの表示設定ができます。";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "F8j-4g-kmT"; */
+"F8j-4g-kmT.title" = "設定";
+
+/* Class = "UILabel"; text = "End date"; ObjectID = "I4A-a8-Rph"; */
+"I4A-a8-Rph.text" = "終了日";
+
+/* Class = "UILabel"; text = "2000/01/01"; ObjectID = "I51-eL-Kg3"; */
+"I51-eL-Kg3.text" = "2000/01/01";
+
+/* Class = "UITabBarItem"; title = "Timer List"; ObjectID = "IOE-Dm-AE2"; */
+"IOE-Dm-AE2.title" = "タイマーリスト";
+
+/* Class = "UILabel"; text = "1.0.0"; ObjectID = "L2X-0U-mls"; */
+"L2X-0U-mls.text" = "1.0.0";
+
+/* Class = "UILabel"; text = "is"; ObjectID = "MMJ-LT-b3i"; */
+"MMJ-LT-b3i.text" = "is";
+
+/* Class = "UILabel"; text = "Setting Apple Watch"; ObjectID = "MYf-uC-pcn"; */
+"MYf-uC-pcn.text" = "Apple Watch設定";
+
+/* Class = "UITableViewSection"; headerTitle = "Info"; ObjectID = "MyM-nb-9IU"; */
+"MyM-nb-9IU.headerTitle" = "Info";
+
+/* Class = "UINavigationItem"; title = "Timer List"; ObjectID = "T39-v3-kGV"; */
+"T39-v3-kGV.title" = "タイマーリスト";
+
+/* Class = "UILabel"; text = "2000/01/01"; ObjectID = "Z70-tK-FRV"; */
+"Z70-tK-FRV.text" = "2000/01/01";
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "a5g-lf-1he"; */
+"a5g-lf-1he.placeholder" = "タイトル";
+
+/* Class = "UILabel"; text = "App version"; ObjectID = "fXa-tY-apw"; */
+"fXa-tY-apw.text" = "アプリバージョン";
+
+/* Class = "UILabel"; text = "Notification time"; ObjectID = "gZt-rz-Ty2"; */
+"gZt-rz-Ty2.text" = "通知時刻";
+
+/* Class = "UILabel"; text = "2000/01/01"; ObjectID = "lss-Hz-xaT"; */
+"lss-Hz-xaT.text" = "2000/01/01";
+
+/* Class = "UILabel"; text = "label"; ObjectID = "mIn-6P-NWW"; */
+"mIn-6P-NWW.text" = "ラベル";
+
+/* Class = "UILabel"; text = "999 days away"; ObjectID = "peT-kr-y4e"; */
+"peT-kr-y4e.text" = "999 days away";
+
+/* Class = "UILabel"; text = "2000/01/01"; ObjectID = "rPL-mu-6ER"; */
+"rPL-mu-6ER.text" = "2000/01/01";
+
+/* Class = "UINavigationItem"; title = "Setting Apple Watch"; ObjectID = "rZ9-dn-X3J"; */
+"rZ9-dn-X3J.title" = "Apple Watch設定";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wtb-K5-5e4"; */
+"wtb-K5-5e4.text" = "タイトル";
