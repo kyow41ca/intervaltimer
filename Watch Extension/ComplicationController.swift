@@ -39,7 +39,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     }
     
     func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
-        let time = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * 60 * 24 * 2))
+        let time = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * 60 * 24 * 7))
         handler(time)
     }
     
@@ -53,9 +53,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         // Call the handler with the current timeline entry
         
         let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
-        
-        delegate.loadData(0)
-        
         let timer: [String : AnyObject] = delegate.timerlist
         
         if (!(timer["nodata"] as! Bool)) {
@@ -124,9 +121,6 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         
         // データを取得する
         let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
-        
-        delegate.loadData(0)
-        
         let timer: [String : AnyObject] = delegate.timerlist
         
         if (!(timer["nodata"] as! Bool)) {
@@ -145,7 +139,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             var day: Int = countDownNum
             var dayStrs: String = ""
             
-            for _ in 1...2 {
+            for _ in 1...7 {
                 // 今日の日付からnumを引く＝その日の残り日数
                 day = day - 1
                 

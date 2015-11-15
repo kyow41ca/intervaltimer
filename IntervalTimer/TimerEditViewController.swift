@@ -262,8 +262,10 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
             print(error)
         }
         
-        // 通知センターに登録する
-        NotifyUtils.addNotifycation(newData)
+        // 通知時刻を過ぎていない場合だけ、通知センターに登録する
+        if (0 < newData.notify!.timeIntervalSinceDate(NSDate())) {
+            NotifyUtils.addNotifycation(newData)
+        }
     }
     
     // 編集したデータをCoreDataにアップデートする
@@ -297,9 +299,13 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
                 //newData.repeats = repeatsSwitch.on
                 editData.repeats = false // 繰り返し機能はつけないが、カラムは残しておくためすべてfalseにしておく
                 
-                // 通知センターを登録する
+                // もともとの通知センターをキャンセルする
                 NotifyUtils.cancelNotifycation(editData.id!)
-                NotifyUtils.addNotifycation(editData)
+                
+                // 通知時刻を過ぎていない場合だけ、通知センターに登録する
+                if (0 < editData.notify!.timeIntervalSinceDate(NSDate())) {
+                    NotifyUtils.addNotifycation(editData)
+                }
             }
         } catch let error as NSError {
             print(error)

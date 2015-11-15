@@ -59,7 +59,7 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
         loadData(0)
     }
     
-    private func loadData(pageNo: Int) {
+    func loadData(pageNo: Int) {
         if (WCSession.defaultSession().reachable) {
             let contents = ["val" : pageNo]
             let session = WCSession.defaultSession()
@@ -76,7 +76,7 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
         }
     }
     
-    private func setData() {
+    func setData() {
         // タイマーリストを取得する
         let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
         var timer: [String : AnyObject] = delegate.timerlist
@@ -122,7 +122,7 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
 
     }
     
-    private func updateComplication() {
+    func updateComplication() {
         let server: CLKComplicationServer = CLKComplicationServer.sharedInstance()
         for var complication: CLKComplication in server.activeComplications {
             server.reloadTimelineForComplication(complication)

@@ -12,6 +12,9 @@ import WatchConnectivity
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     
     var timerlist: [String : AnyObject] = ["nodata" : true]
+    
+    let wcSession = WCSession.defaultSession()
+    var timer: NSTimer = NSTimer()
 
     func applicationDidFinishLaunching() {
         
@@ -31,12 +34,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         // Use this method to pause ongoing tasks, disable timers, etc.
     }
     
-    func loadData(pageNo: Int) {
-        if (WCSession.defaultSession().reachable) {
-            let contents = ["val" : pageNo]
-            let session = WCSession.defaultSession()
+    func loadData() {
+        if (wcSession.reachable) {
+            let contents = ["val" : 0]
             
-            session.sendMessage(contents, replyHandler: { (replyMessage) -> Void in
+            wcSession.sendMessage(contents, replyHandler: { (replyMessage) -> Void in
                 // タイマーリストを取得する
                 self.timerlist = replyMessage
                 }) { (error) -> Void in
