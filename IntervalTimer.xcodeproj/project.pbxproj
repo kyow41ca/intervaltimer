@@ -19,6 +19,7 @@
 		1979961C1BF39C5200F24083 /* TimerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979961B1BF39C5200F24083 /* TimerListCell.swift */; };
 		1979961E1BF3A42D00F24083 /* WatchSettingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979961D1BF3A42D00F24083 /* WatchSettingList.swift */; };
 		197996201BF3A47700F24083 /* WatchSettingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1979961F1BF3A47700F24083 /* WatchSettingListCell.swift */; };
+		198C4A941C00CB3A006B92C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 198C4A931C00CB3A006B92C8 /* LaunchScreen.storyboard */; };
 		199448C71BDCEEE600F5E45C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448C61BDCEEE600F5E45C /* AppDelegate.swift */; };
 		199448C91BDCEEE600F5E45C /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448C81BDCEEE600F5E45C /* TimerListViewController.swift */; };
 		199448CC1BDCEEE600F5E45C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 199448CA1BDCEEE600F5E45C /* Main.storyboard */; };
@@ -136,6 +137,7 @@
 		1979961B1BF39C5200F24083 /* TimerListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerListCell.swift; sourceTree = "<group>"; };
 		1979961D1BF3A42D00F24083 /* WatchSettingList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSettingList.swift; sourceTree = "<group>"; };
 		1979961F1BF3A47700F24083 /* WatchSettingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSettingListCell.swift; sourceTree = "<group>"; };
+		198C4A931C00CB3A006B92C8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		199448C31BDCEEE600F5E45C /* IntervalTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntervalTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		199448C61BDCEEE600F5E45C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		199448C81BDCEEE600F5E45C /* TimerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				199448E01BDCFEF500F5E45C /* TimerEntity.swift */,
 				19455D931BF0E23E0031E937 /* SettingsController.swift */,
 				19455D951BF0E5920031E937 /* SettiingAppleWatchController.swift */,
+				198C4A931C00CB3A006B92C8 /* LaunchScreen.storyboard */,
 			);
 			path = IntervalTimer;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				199448D11BDCEEE600F5E45C /* Assets.xcassets in Resources */,
+				198C4A941C00CB3A006B92C8 /* LaunchScreen.storyboard in Resources */,
 				196201581BF8CBC400B07BAB /* Localizable.strings in Resources */,
 				199448CC1BDCEEE600F5E45C /* Main.storyboard in Resources */,
 			);
@@ -680,6 +684,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "97c699a3-c37a-4a52-afcd-d07ae33c0beb";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -702,6 +707,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuuki Yoshinaga (A78W8R4KK4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -717,6 +723,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "97c699a3-c37a-4a52-afcd-d07ae33c0beb";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -750,6 +757,7 @@
 				INFOPLIST_FILE = IntervalTimer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.yuki.yoshinaga.IntervalTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -826,6 +834,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.yuki.yoshinaga.IntervalTimer.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -856,6 +865,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.yuki.yoshinaga.IntervalTimerKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -887,6 +897,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.yuki.yoshinaga.IntervalTimerKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -906,7 +917,7 @@
 				1949B3321BEA4D5400D730F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		199448BE1BDCEEE600F5E45C /* Build configuration list for PBXProject "IntervalTimer" */ = {
 			isa = XCConfigurationList;
@@ -915,7 +926,7 @@
 				199448D71BDCEEE600F5E45C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		199448D81BDCEEE600F5E45C /* Build configuration list for PBXNativeTarget "IntervalTimer" */ = {
 			isa = XCConfigurationList;
@@ -924,7 +935,7 @@
 				199448DA1BDCEEE600F5E45C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		19FDAA2C1BE8E67B003B2934 /* Build configuration list for PBXNativeTarget "Watch Extension" */ = {
 			isa = XCConfigurationList;
@@ -933,7 +944,7 @@
 				19FDAA2E1BE8E67B003B2934 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		19FDAA301BE8E67B003B2934 /* Build configuration list for PBXNativeTarget "Watch" */ = {
 			isa = XCConfigurationList;
@@ -942,7 +953,7 @@
 				19FDAA321BE8E67B003B2934 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		19FDAA481BE8F4F1003B2934 /* Build configuration list for PBXNativeTarget "IntervalTimerKit" */ = {
 			isa = XCConfigurationList;
@@ -951,7 +962,7 @@
 				19FDAA4A1BE8F4F1003B2934 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
