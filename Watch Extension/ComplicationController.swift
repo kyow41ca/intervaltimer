@@ -308,10 +308,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     
     func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
         if (complication.family == .ModularLarge) {
-            let timerImg1 = UIImage(named: "tab_timerlist_off")
             let templateML = CLKComplicationTemplateModularLargeStandardBody()
             
-            templateML.headerImageProvider = CLKImageProvider(onePieceImage: timerImg1!)
             templateML.headerTextProvider = CLKSimpleTextProvider(text: "LD Timer")
             templateML.body1TextProvider = CLKSimpleTextProvider(text: "SET")
             templateML.body2TextProvider = CLKSimpleTextProvider(text: "-")
@@ -337,19 +335,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             handler(templateCS)
         }
         else if (complication.family == .UtilitarianLarge) {
-            let timerImg2 = UIImage(named: "tab_timerlist_off")
             let templateUL = CLKComplicationTemplateUtilitarianLargeFlat()
-            
-            templateUL.imageProvider = CLKImageProvider(onePieceImage: timerImg2!)
             templateUL.textProvider = CLKSimpleTextProvider(text: "SET")
             
             handler(templateUL)
         }
         else if (complication.family == .UtilitarianSmall) {
-            let timerImg3 = UIImage(named: "tab_timerlist_off")
-            let templateUS = CLKComplicationTemplateUtilitarianSmallFlat()
-            
-            templateUS.imageProvider = CLKImageProvider(onePieceImage: timerImg3!)
+            let templateUS = CLKComplicationTemplateUtilitarianSmallFlat()            
             templateUS.textProvider = CLKSimpleTextProvider(text: "SET")
             
             handler(templateUS)
@@ -360,10 +352,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     }
     
     func createTimeLineEntryML(headerText: String, body1Text: String, body2Text: String, date: NSDate) -> CLKComplicationTimelineEntry {
-        let timerImg = UIImage(named: "tab_timerlist_off")
         let template = CLKComplicationTemplateModularLargeStandardBody()
         
-        template.headerImageProvider = CLKImageProvider(onePieceImage: timerImg!)
         template.headerTextProvider = CLKSimpleTextProvider(text: headerText)
         template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
         template.body2TextProvider = CLKSimpleTextProvider(text: "〜" + body2Text)
@@ -398,10 +388,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     }
     
     func createTimeLineEntryUL(bodyText: String, date: NSDate) -> CLKComplicationTimelineEntry {
-        let timerImg = UIImage(named: "tab_timerlist_off")
         let template = CLKComplicationTemplateUtilitarianLargeFlat()
-        
-        template.imageProvider = CLKImageProvider(onePieceImage: timerImg!)
         template.textProvider = CLKSimpleTextProvider(text: bodyText)
         
         let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
@@ -410,10 +397,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     }
     
     func createTimeLineEntryUS(bodyText: String, date: NSDate) -> CLKComplicationTimelineEntry {
-        let timerImg = UIImage(named: "tab_timerlist_off")
         let template = CLKComplicationTemplateUtilitarianSmallFlat()
-        
-        template.imageProvider = CLKImageProvider(onePieceImage: timerImg!)
         template.textProvider = CLKSimpleTextProvider(text: bodyText)
         
         let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)

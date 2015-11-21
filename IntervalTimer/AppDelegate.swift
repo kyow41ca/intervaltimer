@@ -36,7 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             userDefaults.synchronize()
             
             // Apple Watch表示フラグの初期値をセットする
-            userDefaults.registerDefaults(["WatchViewID" : ""])
+            userDefaults.setObject("", forKey: "WatchViewID")
+            userDefaults.synchronize()
             
             // 通知許可設定を行う
             let types : UIUserNotificationType =

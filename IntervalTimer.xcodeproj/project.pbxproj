@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1905D41D1BEE6297003EC9F8 /* tab_timerlist_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 1905D41C1BEE6297003EC9F8 /* tab_timerlist_off.png */; };
 		19226E8A1BF3871A00218D21 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19226E891BF3871A00218D21 /* iAd.framework */; };
 		19455D941BF0E23E0031E937 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19455D931BF0E23E0031E937 /* SettingsController.swift */; };
 		19455D961BF0E5920031E937 /* SettiingAppleWatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19455D951BF0E5920031E937 /* SettiingAppleWatchController.swift */; };
@@ -28,15 +27,15 @@
 		199448DE1BDCFC9900F5E45C /* TimerEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448DD1BDCFC9900F5E45C /* TimerEditViewController.swift */; };
 		199448E11BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448DF1BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift */; };
 		199448E21BDCFEF500F5E45C /* TimerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448E01BDCFEF500F5E45C /* TimerEntity.swift */; };
+		19E35B9E1C005AED00EC2398 /* WatchAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19E35B9D1C005AED00EC2398 /* WatchAssets.xcassets */; };
 		19FDAA0B1BE8E4CF003B2934 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19FDAA091BE8E4CF003B2934 /* WatchConnectivity.framework */; };
 		19FDAA0C1BE8E4CF003B2934 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19FDAA0A1BE8E4CF003B2934 /* WatchKit.framework */; };
 		19FDAA131BE8E67B003B2934 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FDAA111BE8E67B003B2934 /* Interface.storyboard */; };
-		19FDAA151BE8E67B003B2934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FDAA141BE8E67B003B2934 /* Assets.xcassets */; };
 		19FDAA1C1BE8E67B003B2934 /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19FDAA1B1BE8E67B003B2934 /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19FDAA211BE8E67B003B2934 /* TimerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDAA201BE8E67B003B2934 /* TimerListController.swift */; };
 		19FDAA231BE8E67B003B2934 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDAA221BE8E67B003B2934 /* ExtensionDelegate.swift */; };
 		19FDAA251BE8E67B003B2934 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FDAA241BE8E67B003B2934 /* ComplicationController.swift */; };
-		19FDAA271BE8E67B003B2934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FDAA261BE8E67B003B2934 /* Assets.xcassets */; };
+		19FDAA271BE8E67B003B2934 /* WatchAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FDAA261BE8E67B003B2934 /* WatchAssets.xcassets */; };
 		19FDAA2B1BE8E67B003B2934 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 19FDAA0F1BE8E67B003B2934 /* Watch.app */; };
 		19FDAA371BE8EB64003B2934 /* IntervalTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 199448CD1BDCEEE600F5E45C /* IntervalTimer.xcdatamodeld */; };
 		19FDAA381BE8EB9A003B2934 /* TimerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199448E01BDCFEF500F5E45C /* TimerEntity.swift */; };
@@ -116,7 +115,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1905D41C1BEE6297003EC9F8 /* tab_timerlist_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_timerlist_off.png; sourceTree = "<group>"; };
 		19226E891BF3871A00218D21 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		19455D931BF0E23E0031E937 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		19455D951BF0E5920031E937 /* SettiingAppleWatchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettiingAppleWatchController.swift; sourceTree = "<group>"; };
@@ -148,17 +146,17 @@
 		199448DD1BDCFC9900F5E45C /* TimerEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerEditViewController.swift; sourceTree = "<group>"; };
 		199448DF1BDCFEF500F5E45C /* TimerEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimerEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		199448E01BDCFEF500F5E45C /* TimerEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerEntity.swift; sourceTree = "<group>"; };
+		19E35B9D1C005AED00EC2398 /* WatchAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WatchAssets.xcassets; sourceTree = "<group>"; };
 		19FDAA091BE8E4CF003B2934 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
 		19FDAA0A1BE8E4CF003B2934 /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		19FDAA0F1BE8E67B003B2934 /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19FDAA121BE8E67B003B2934 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		19FDAA141BE8E67B003B2934 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19FDAA161BE8E67B003B2934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19FDAA1B1BE8E67B003B2934 /* Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19FDAA201BE8E67B003B2934 /* TimerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListController.swift; sourceTree = "<group>"; };
 		19FDAA221BE8E67B003B2934 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		19FDAA241BE8E67B003B2934 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		19FDAA261BE8E67B003B2934 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Watch Extension/Assets.xcassets"; sourceTree = "<group>"; };
+		19FDAA261BE8E67B003B2934 /* WatchAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WatchAssets.xcassets; sourceTree = "<group>"; };
 		19FDAA281BE8E67B003B2934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19FDAA341BE8E848003B2934 /* IntervalTimer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IntervalTimer.entitlements; sourceTree = "<group>"; };
 		19FDAA351BE8E987003B2934 /* Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Watch.entitlements; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 				199448C51BDCEEE600F5E45C /* IntervalTimer */,
 				19FDAA101BE8E67B003B2934 /* Watch */,
 				19FDAA1F1BE8E67B003B2934 /* Watch Extension */,
-				19FDAA261BE8E67B003B2934 /* Assets.xcassets */,
 				19FDAA401BE8F4F1003B2934 /* IntervalTimerKit */,
 				199448C41BDCEEE600F5E45C /* Products */,
 			);
@@ -263,8 +260,8 @@
 			children = (
 				19FDAA351BE8E987003B2934 /* Watch.entitlements */,
 				19FDAA111BE8E67B003B2934 /* Interface.storyboard */,
-				19FDAA141BE8E67B003B2934 /* Assets.xcassets */,
 				19FDAA161BE8E67B003B2934 /* Info.plist */,
+				19E35B9D1C005AED00EC2398 /* WatchAssets.xcassets */,
 			);
 			path = Watch;
 			sourceTree = "<group>";
@@ -272,12 +269,12 @@
 		19FDAA1F1BE8E67B003B2934 /* Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				1905D41C1BEE6297003EC9F8 /* tab_timerlist_off.png */,
 				19FDAA361BE8E99B003B2934 /* Watch Extension.entitlements */,
 				19FDAA201BE8E67B003B2934 /* TimerListController.swift */,
 				19FDAA221BE8E67B003B2934 /* ExtensionDelegate.swift */,
 				19FDAA241BE8E67B003B2934 /* ComplicationController.swift */,
 				19FDAA281BE8E67B003B2934 /* Info.plist */,
+				19FDAA261BE8E67B003B2934 /* WatchAssets.xcassets */,
 				196201681BF8D37300B07BAB /* Localizable.strings */,
 			);
 			path = "Watch Extension";
@@ -479,7 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19FDAA151BE8E67B003B2934 /* Assets.xcassets in Resources */,
+				19E35B9E1C005AED00EC2398 /* WatchAssets.xcassets in Resources */,
 				19FDAA131BE8E67B003B2934 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,9 +485,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19FDAA271BE8E67B003B2934 /* Assets.xcassets in Resources */,
+				19FDAA271BE8E67B003B2934 /* WatchAssets.xcassets in Resources */,
 				196201661BF8D37300B07BAB /* Localizable.strings in Resources */,
-				1905D41D1BEE6297003EC9F8 /* tab_timerlist_off.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,7 +725,7 @@
 		199448D91BDCEEE600F5E45C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = iOSAppIcon;
 				CODE_SIGN_ENTITLEMENTS = IntervalTimer/IntervalTimer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -746,7 +742,7 @@
 		199448DA1BDCEEE600F5E45C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = iOSAppIcon;
 				CODE_SIGN_ENTITLEMENTS = IntervalTimer/IntervalTimer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -803,7 +799,7 @@
 		19FDAA311BE8E67B003B2934 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = WatchAppIcon;
 				CODE_SIGN_ENTITLEMENTS = Watch/Watch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
@@ -823,7 +819,7 @@
 		19FDAA321BE8E67B003B2934 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = WatchAppIcon;
 				CODE_SIGN_ENTITLEMENTS = Watch/Watch.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
