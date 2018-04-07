@@ -18,8 +18,8 @@ class SettiingAppleWatchController : UITableViewController {
     var timerLists = [WatchSettingList]()
     
     // NSUserDefaults のインスタンス
-    let userDefaults = NSUserDefaults.standardUserDefaults()
-    let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let userDefaults = UserDefaults.standard
+    let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // セルを保持しておく
     var currentCell: UITableViewCell = UITableViewCell()
@@ -28,15 +28,15 @@ class SettiingAppleWatchController : UITableViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {        
+    override func viewWillAppear(_ animated: Bool) {
         // CoreData呼び出し
         let context : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
-        let freg = NSFetchRequest(entityName: "TimerEntity")
+        let freg = NSFetchRequest<NSFetchRequestResult>(entityName: "TimerEntity")
         freg.sortDescriptors = [NSSortDescriptor(key: "to", ascending: true)]
         
         // セルのデータを全行読み込む
         do {
-            timerlist = try context.executeFetchRequest(freg)
+            timerlist = try context.fetch(freg) as Array<AnyObject>
         } catch let error as NSError {
             print(error)
         }
@@ -45,24 +45,24 @@ class SettiingAppleWatchController : UITableViewController {
         tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 今のセルのチェックを外す
-        currentCell.accessoryType = UITableViewCellAccessoryType.None
+        currentCell.accessoryType = UITableViewCellAccessoryType.none
         
         // チェックをつける
-        let cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        let cell: UITableViewCell = tableView.cellForRow(at: indexPath as IndexPath)!
+        cell.accessoryType = UITableViewCellAccessoryType.checkmark
         
         // セルの選択状態を解除する
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
         // データを読み込む
-        let rowData: [String : AnyObject] = Utility.rowDataFormat(timerlist[indexPath.row] as! NSManagedObject)
+        let rowData: [String : AnyObject] = Utility.rowDataFormat(data: timerlist[indexPath.row] as! NSManagedObject)
         let id: String = rowData[Utility.ID] as! String
-        let title: String = rowData[Utility.TITLE] as! String
-
+        let _: String = rowData[Utility.TITLE] as! String
+        
         // NSUSerDefaultsにApple Watch表示用idを保持する
-        userDefaults.setObject(id, forKey: "WatchViewID")
+        userDefaults.set(id, forKey: "WatchViewID")
         userDefaults.synchronize()
         
         // AppDelegateの値を更新する
@@ -72,39 +72,39 @@ class SettiingAppleWatchController : UITableViewController {
         let alertController = UIAlertController(
             title: NSLocalizedString("settingWatchViewSaveDialogTitle", comment: ""),
             message: NSLocalizedString("settingWatchViewSaveDialogMessage", comment: ""),
-            preferredStyle: .Alert
+            preferredStyle: .alert
         )
         
         // OKボタンの設定（押した時にモーダルを閉じる）
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in self.closeModalDialog() }))
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.closeModalDialog() }))
         
         // ダイアログを画面に表示する
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     // セルの行数を指定
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timerlist.count
     }
     
     // セルの値を設定
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルの情報を取得する
-        let cell: WatchSettingListCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! WatchSettingListCell
+        let cell: WatchSettingListCell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! WatchSettingListCell
         
         // CoreDataから取得したデータのうち、今の行を読み込む
-        let rowData: [String : AnyObject] = Utility.rowDataFormat(timerlist[indexPath.row] as! NSManagedObject)
-
+        let rowData: [String : AnyObject] = Utility.rowDataFormat(data: timerlist[indexPath.row] as! NSManagedObject)
+        
         // カスタムセルにデータをセットする
-        setTimerListData(rowData)
-        cell.setCell(timerLists[indexPath.row])
+        setTimerListData(rowData: rowData)
+        cell.setCell(timerlist: timerLists[indexPath.row])
         
         // フラグが立っているものにチェックをつける
         let id: String = rowData[Utility.ID] as! String
-
+        
         if (id == appDel.watchViewID) {
             currentCell = cell
-            currentCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            currentCell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
         
         return cell
@@ -122,13 +122,13 @@ class SettiingAppleWatchController : UITableViewController {
         timerLists.append(timer)
     }
     
-    @IBAction func closeModalDialog(sender: UIBarButtonItem) {
+    @IBAction func closeModalDialog(_ sender: UIBarButtonItem) {
         closeModalDialog()
     }
     
     // モーダルを閉じる
     func closeModalDialog() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

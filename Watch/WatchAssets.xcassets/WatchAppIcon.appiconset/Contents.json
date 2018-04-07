@@ -39,14 +39,6 @@
       "subtype" : "38mm"
     },
     {
-      "size" : "44x44",
-      "idiom" : "watch",
-      "filename" : "88.png",
-      "scale" : "2x",
-      "role" : "longLook",
-      "subtype" : "42mm"
-    },
-    {
       "size" : "86x86",
       "idiom" : "watch",
       "filename" : "172.png",
@@ -61,6 +53,11 @@
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"
+    },
+    {
+      "idiom" : "watch-marketing",
+      "size" : "1024x1024",
+      "scale" : "1x"
     }
   ],
   "info" : {

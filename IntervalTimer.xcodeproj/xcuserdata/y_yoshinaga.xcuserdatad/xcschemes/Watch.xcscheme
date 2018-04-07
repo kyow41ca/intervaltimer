@@ -14,9 +14,37 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "19FDAA0E1BE8E67B003B2934"
+               BuildableName = "Watch.app"
+               BlueprintName = "Watch"
+               ReferencedContainer = "container:IntervalTimer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "199448C21BDCEEE600F5E45C"
                BuildableName = "IntervalTimer.app"
                BlueprintName = "IntervalTimer"
+               ReferencedContainer = "container:IntervalTimer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "19FDAA1A1BE8E67B003B2934"
+               BuildableName = "Watch Extension.appex"
+               BlueprintName = "Watch Extension"
                ReferencedContainer = "container:IntervalTimer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +60,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "199448C21BDCEEE600F5E45C"
-            BuildableName = "IntervalTimer.app"
-            BlueprintName = "IntervalTimer"
+            BlueprintIdentifier = "19FDAA0E1BE8E67B003B2934"
+            BuildableName = "Watch.app"
+            BlueprintName = "Watch"
             ReferencedContainer = "container:IntervalTimer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -42,7 +70,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -51,16 +79,27 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.carousel"
+         RemotePath = "/LD Timer">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "199448C21BDCEEE600F5E45C"
-            BuildableName = "IntervalTimer.app"
-            BlueprintName = "IntervalTimer"
+            BlueprintIdentifier = "19FDAA0E1BE8E67B003B2934"
+            BuildableName = "Watch.app"
+            BlueprintName = "Watch"
             ReferencedContainer = "container:IntervalTimer.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "19FDAA0E1BE8E67B003B2934"
+            BuildableName = "Watch.app"
+            BlueprintName = "Watch"
+            ReferencedContainer = "container:IntervalTimer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +109,27 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.carousel"
+         RemotePath = "/LD Timer">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "199448C21BDCEEE600F5E45C"
-            BuildableName = "IntervalTimer.app"
-            BlueprintName = "IntervalTimer"
+            BlueprintIdentifier = "19FDAA0E1BE8E67B003B2934"
+            BuildableName = "Watch.app"
+            BlueprintName = "Watch"
             ReferencedContainer = "container:IntervalTimer.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "19FDAA0E1BE8E67B003B2934"
+            BuildableName = "Watch.app"
+            BlueprintName = "Watch"
+            ReferencedContainer = "container:IntervalTimer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

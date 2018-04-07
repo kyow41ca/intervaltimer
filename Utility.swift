@@ -31,46 +31,46 @@ class Utility {
 
     // NSDateをStringに変換する
     internal static func dateString(date: NSDate, format: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale?
         dateFormatter.dateFormat = format
-        let dateString: String = dateFormatter.stringFromDate(date)
+        let dateString: String = dateFormatter.string(from: date as Date)
         return dateString
     }
     
     // NSDateの日付だけを取り出してあとは捨てる
     internal static func cutTime(date: NSDate) -> NSDate {
         // カレンダーを取得
-        let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!
         
         // 対象の NSDate から NSDateComponents を取得
-        let dateComponents = calendar.components([.Era, .Year, .Month, .Day], fromDate: date)
+        let dateComponents = calendar.components([.era, .year, .month, .day], from: date as Date)
         
         // NSDateComponents から NSDate を生成
-        return calendar.dateFromComponents(dateComponents)!
+        return calendar.date(from: dateComponents)! as NSDate
     }
     
     // Toと通知時刻から通知を行うNSDateを生成する
     internal static func createNotifyTime(toDate: NSDate, notifyDate: NSDate) -> NSDate {
         // カレンダーを取得
-        let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!
         
         // 対象の NSDate から NSDateComponents を取得
-        let toDateComps = calendar.components([.Era, .Year, .Month, .Day], fromDate: toDate)
-        let notifyDateComps = calendar.components([.Era, .Year, .Month, .Day, .Hour, .Minute], fromDate: notifyDate)
+        let toDateComps = calendar.components([.era, .year, .month, .day], from: toDate as Date)
+        let notifyDateComps = calendar.components([.era, .year, .month, .day, .hour, .minute], from: notifyDate as Date)
         
-        return calendar.dateWithEra(1, year: toDateComps.year, month: toDateComps.month, day: toDateComps.day, hour: notifyDateComps.hour, minute: notifyDateComps.minute, second: 0, nanosecond: 0)!
+        return calendar.date(era: 1, year: toDateComps.year!, month: toDateComps.month!, day: toDateComps.day!, hour: notifyDateComps.hour!, minute: notifyDateComps.minute!, second: 0, nanosecond: 0)! as NSDate
     }
     
     // UTCをシステムロケールのタイムゾーンに合わせてNSDateを返す
     internal static func conveSysLocaleDate(date: NSDate) -> NSDate {
         // カレンダーを取得
-        let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!
         
         // 対象の NSDate から NSDateComponents を取得
-        let dateComps = calendar.components([.Era, .Year, .Month, .Day, .Hour, .Minute], fromDate: date)
+        let dateComps = calendar.components([.era, .year, .month, .day, .hour, .minute], from: date as Date)
         
-        return calendar.dateWithEra(1, year: dateComps.year, month: dateComps.month, day: dateComps.day, hour: dateComps.hour, minute: dateComps.minute, second: dateComps.second, nanosecond: 0)!
+        return calendar.date(era: 1, year: dateComps.year!, month: dateComps.month!, day: dateComps.day!, hour: dateComps.hour!, minute: dateComps.minute!, second: dateComps.second!, nanosecond: 0)! as NSDate
     }
     
     // 日時間隔の列挙体
@@ -92,7 +92,7 @@ class Utility {
     //  date : 元の日時を NSDate で指定します
     //
     internal static func dateAdd(interval: Interval, number: Int, date: NSDate) -> NSDate {
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = NSCalendar.current
         let comp = NSDateComponents()
         switch interval {
         case .Year:
@@ -110,7 +110,8 @@ class Utility {
 //        default:
 //            comp.day = 0
         }
-        return calendar.dateByAddingComponents(comp, toDate: date, options: [])!
+        //return calendar.dateByAddingComponents(comp, toDate: date, options: [])!
+        return calendar.date(byAdding: comp as DateComponents, to: date as Date, wrappingComponents: false)! as NSDate
     }
     
     // 2つの日時の間隔を整数型の値で返します
@@ -120,7 +121,8 @@ class Utility {
     //           date1よりdate2が前なら負の値を返します
     //
     internal static func dateDiff(interval: Interval, date1: NSDate, date2: NSDate) -> Int {
-        let calendar = NSCalendar.currentCalendar()
+        _ = NSCalendar.current
+        /*
         switch interval {
         case .Year:
             let comp: NSDateComponents =
@@ -155,14 +157,16 @@ class Utility {
 //        default:
 //            return 0
         }
+        */
+        return 0
     }
 
     // date1とdate2を比較して同じなら0を、
     // date1が古ければ-1、date1が新しければ1を返す
     internal static func dateCompare(date1: NSDate, date2: NSDate) -> Int {
-        if (date1.compare(date2) == NSComparisonResult.OrderedDescending){
+        if (date1.compare(date2 as Date) == ComparisonResult.orderedDescending){
             return -1
-        } else if (date1.compare(date2) == NSComparisonResult.OrderedAscending){
+        } else if (date1.compare(date2 as Date) == ComparisonResult.orderedAscending){
             return 1
         } else {
             return 0
@@ -174,41 +178,41 @@ class Utility {
         var rowData: [String : AnyObject] = [:]
         
         // 基本データ変数化
-        let id = data.valueForKeyPath("id") as! String
-        let title = data.valueForKeyPath("title") as! String
-        let from = data.valueForKeyPath("from") as! NSDate
-        let to = data.valueForKeyPath("to") as! NSDate
+        let id = data.value(forKeyPath: "id") as! String
+        let title = data.value(forKeyPath: "title") as! String
+        let from = data.value(forKeyPath: "from") as! NSDate
+        let to = data.value(forKeyPath: "to") as! NSDate
         //let notify = data.valueForKeyPath("notify") as! NSDate
         //let repeats = data.valueForKeyPath("repeats") as! NSNumber
         
         // 基本データ
-        rowData[ID] = id
-        rowData[TITLE] = title
+        rowData[ID] = id as AnyObject
+        rowData[TITLE] = title as AnyObject
         rowData[FROM] = from
         rowData[TO] = to
         //rowData = ["notify" : notify]
         //rowData = ["repeats" : repeats]
         
         // 日付文字列
-        rowData[FROM_STR] = Utility.dateString(from, format: "yyyy/MM/dd")
-        rowData[TO_STR] = Utility.dateString(to, format: "yyyy/MM/dd")
+        rowData[FROM_STR] = Utility.dateString(date: from, format: "yyyy/MM/dd") as AnyObject
+        rowData[TO_STR] = Utility.dateString(date: to, format: "yyyy/MM/dd") as AnyObject
         
         // 残日数文字
-        rowData[COUNTDOWN_NUM] = Utility.dateDiff(Utility.Interval.Day, date1: Utility.cutTime(NSDate()), date2: to)
-        rowData[COUNTDOWN_NUM_STR] = to.stringForTimeIntervalSinceCreated()
+        rowData[COUNTDOWN_NUM] = Utility.dateDiff(interval: Utility.Interval.Day, date1: Utility.cutTime(date: NSDate()), date2: to) as AnyObject
+        rowData[COUNTDOWN_NUM_STR] = to.stringForTimeIntervalSinceCreated() as AnyObject
         var countDownState: String = ""
         
         // 当日
-        let calendar: NSCalendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
-        if (calendar.isDate(Utility.cutTime(NSDate()), inSameDayAsDate: to)) {
+        let calendar: NSCalendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!
+        if (calendar.isDate(Utility.cutTime(date: NSDate()) as Date, inSameDayAs: to as Date)) {
             countDownState = Utility.TODAY
         }
         // 開始日前
-        else if (0 > NSDate().timeIntervalSinceDate(from)) {
+        else if (0 > NSDate().timeIntervalSince(from as Date)) {
             countDownState = Utility.PREV
         }
         // 過日
-        else if (0 > to.timeIntervalSinceDate(Utility.cutTime(NSDate()))) {
+        else if (0 > to.timeIntervalSince(Utility.cutTime(date: NSDate()) as Date)) {
             countDownState = Utility.TIMEOVER
         }
         // 当日まで
@@ -216,13 +220,13 @@ class Utility {
             countDownState = " away"
         }
         
-        rowData[COUNTDOWN_STATE] = countDownState
+        rowData[COUNTDOWN_STATE] = countDownState as AnyObject
         
         // 進捗バーのパーセンテージ
-        let fromToSub: Double = to.timeIntervalSinceDate(from)
-        let fromNowSub: Double = Utility.cutTime(NSDate()).timeIntervalSinceDate(from)
+        let fromToSub: Double = to.timeIntervalSince(from as Date)
+        let fromNowSub: Double = Utility.cutTime(date: NSDate()).timeIntervalSince(from as Date)
         let percent: Float = Float(fromNowSub / fromToSub)
-        rowData[PERCENT] = percent
+        rowData[PERCENT] = percent as AnyObject
         
         return rowData
     }

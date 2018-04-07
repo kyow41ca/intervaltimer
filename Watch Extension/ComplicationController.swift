@@ -6,10 +6,19 @@
 //  Copyright © 2015年 Yuki Yoshinaga. All rights reserved.
 //
 
+import Foundation
 import ClockKit
 import WatchKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDelegate {
+    
+    func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
+        
+    }
+    
+    func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
+        
+    }
     
     let TITLE: String = "title"
     let FROM: String = "from"
@@ -30,7 +39,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     // MARK: - Timeline Configuration
     
     func getSupportedTimeTravelDirectionsForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
-        handler([.Forward])
+        handler([.forward])
     }
     
     func getTimelineStartDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
@@ -39,12 +48,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     }
     
     func getTimelineEndDateForComplication(complication: CLKComplication, withHandler handler: (NSDate?) -> Void) {
-        let time = NSDate(timeIntervalSinceNow: NSTimeInterval(60 * 60 * 24 * 30))
+        let time = NSDate(timeIntervalSinceNow: TimeInterval(60 * 60 * 24 * 30))
         handler(time)
     }
     
     func getPrivacyBehaviorForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationPrivacyBehavior) -> Void) {
-        handler(.ShowOnLockScreen)
+        handler(.showOnLockScreen)
     }
     
     // MARK: - Timeline Population
@@ -52,14 +61,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     func getCurrentTimelineEntryForComplication(complication: CLKComplication, withHandler handler: ((CLKComplicationTimelineEntry?) -> Void)) {
         // Call the handler with the current timeline entry
         
-        let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
-        let timer: [String : AnyObject] = delegate.timerlist
+        let delegate: ExtensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+        let timer: [String : AnyObject] = delegate.timerlist as [String : AnyObject]
         
         if (!(timer["nodata"] as! Bool)) {
             let title = timer[TITLE] as! String
-            let fromStr = timer[FROM_STR] as! String
+            _ = timer[FROM_STR] as! String
             let toStr = timer[TO_STR] as! String
-            var countDownNum = timer[COUNTDOWN_NUM] as! Int
+            let countDownNum = timer[COUNTDOWN_NUM] as! Int
             let countDownNumStr = timer[COUNTDOWN_NUM_STR] as! String
             let countDownState = timer[COUNTDOWN_STATE] as! String
             var cnt: String = ""
@@ -81,24 +90,24 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
                 cnt = countDownNumStr + countDownState
             }
         
-            if (complication.family == .ModularLarge) {
-                let entry = createTimeLineEntryML(title, body1Text: cnt, body2Text: toStr, date: NSDate())
+            if (complication.family == .modularLarge) {
+                let entry = createTimeLineEntryML(headerText: title, body1Text: cnt, body2Text: toStr, date: NSDate())
                 handler(entry)
             }
-            else if (complication.family == .ModularSmall) {
-                let entry = createTimeLineEntryMS(String(countDownNum), fraction: percent, date: NSDate())
+            else if (complication.family == .modularSmall) {
+                let entry = createTimeLineEntryMS(bodyText: String(countDownNum), fraction: percent, date: NSDate())
                 handler(entry)
             }
-            else if (complication.family == .CircularSmall) {
-                let entry = createTimeLineEntryCS(String(countDownNum), fraction: percent, date: NSDate())
+            else if (complication.family == .circularSmall) {
+                let entry = createTimeLineEntryCS(bodyText: String(countDownNum), fraction: percent, date: NSDate())
                 handler(entry)
             }
-            else if (complication.family == .UtilitarianLarge) {
-                let entry = createTimeLineEntryUL(cnt, date: NSDate())
+            else if (complication.family == .utilitarianLarge) {
+                let entry = createTimeLineEntryUL(bodyText: cnt, date: NSDate())
                 handler(entry)
             }
-            else if (complication.family == .UtilitarianSmall) {
-                let entry = createTimeLineEntryUS(String(countDownNum), date: NSDate())
+            else if (complication.family == .utilitarianSmall) {
+                let entry = createTimeLineEntryUS(bodyText: String(countDownNum), date: NSDate())
                 handler(entry)
             }
             else {
@@ -117,10 +126,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         var timeLineEntryArray = [CLKComplicationTimelineEntry]()
         
         // 次の通知日時を設定
-        var nextDate: NSDate = dateAdd(Interval.Day, number: 1, date: cutTime(NSDate()))
+        var nextDate: NSDate = dateAdd(interval: Interval.Day, number: 1, date: cutTime(date: NSDate()))
         
         // データを取得する
-        let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
+        let delegate: ExtensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
         let timer: [String : AnyObject] = delegate.timerlist
         
         if (!(timer["nodata"] as! Bool)) {
@@ -144,13 +153,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
                 day = day - 1
                 
                 // 進捗バーのパーセンテージ
-                let fromToSub: Double = to.timeIntervalSinceDate(from)
-                let fromNowSub: Double = nextDate.timeIntervalSinceDate(from)
+                let fromToSub: Double = to.timeIntervalSince(from as Date)
+                let fromNowSub: Double = nextDate.timeIntervalSince(from as Date)
                 let percent: Float = 1.0 - Float(fromNowSub / fromToSub)
                 
                 // 次の文言を決定する
                 if (0 < day) {
-                    if (0 > nextDate.timeIntervalSinceDate(from)) {
+                    if (0 > nextDate.timeIntervalSince(from as Date)) {
                         dayStrs = self.PREV
                     }
                     else {
@@ -165,24 +174,24 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
                 }
                 
                 // コンプリケーション設定
-                if (complication.family == .ModularLarge) {
-                    let entry = createTimeLineEntryML(title, body1Text: dayStrs, body2Text: toStr, date: nextDate)
+                if (complication.family == .modularLarge) {
+                    let entry = createTimeLineEntryML(headerText: title, body1Text: dayStrs, body2Text: toStr, date: nextDate)
                     timeLineEntryArray.append(entry)
                 }
-                else if (complication.family == .ModularSmall) {
-                    let entry = createTimeLineEntryMS(String(day), fraction: percent, date: nextDate)
+                else if (complication.family == .modularSmall) {
+                    let entry = createTimeLineEntryMS(bodyText: String(day), fraction: percent, date: nextDate)
                     timeLineEntryArray.append(entry)
                 }
-                else if (complication.family == .CircularSmall) {
-                    let entry = createTimeLineEntryCS(String(day), fraction: percent, date: nextDate)
+                else if (complication.family == .circularSmall) {
+                    let entry = createTimeLineEntryCS(bodyText: String(day), fraction: percent, date: nextDate)
                     timeLineEntryArray.append(entry)
                 }
-                else if (complication.family == .UtilitarianLarge) {
-                    let entry = createTimeLineEntryUL(dayStrs, date: nextDate)
+                else if (complication.family == .utilitarianLarge) {
+                    let entry = createTimeLineEntryUL(bodyText: dayStrs, date: nextDate)
                     timeLineEntryArray.append(entry)
                 }
-                else if (complication.family == .UtilitarianSmall) {
-                    let entry = createTimeLineEntryUS(String(day), date: nextDate)
+                else if (complication.family == .utilitarianSmall) {
+                    let entry = createTimeLineEntryUS(bodyText: String(day), date: nextDate)
                     timeLineEntryArray.append(entry)
                 }
                 else {
@@ -190,7 +199,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
                 }
              
                 // 次の通知日時を設定
-                nextDate = dateAdd(Interval.Day, number: 1, date: nextDate)
+                nextDate = dateAdd(interval: Interval.Day, number: 1, date: nextDate)
             }
             handler(timeLineEntryArray)
         }
@@ -199,13 +208,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     // NSDateの日付だけを取り出してあとは捨てる
     func cutTime(date: NSDate) -> NSDate {
         // カレンダーを取得
-        let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!
         
         // 対象の NSDate から NSDateComponents を取得
-        let dateComponents = calendar.components([.Era, .Year, .Month, .Day], fromDate: date)
+        let dateComponents = calendar.components([.era, .year, .month, .day], from: date as Date)
         
         // NSDateComponents から NSDate を生成
-        return calendar.dateFromComponents(dateComponents)!
+        return calendar.date(from: dateComponents)! as NSDate
     }
     
     // 日時間隔の列挙体
@@ -227,7 +236,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     //  date : 元の日時を NSDate で指定します
     //
     func dateAdd(interval: Interval, number: Int, date: NSDate) -> NSDate {
-        let calendar = NSCalendar.currentCalendar()
+        let calendar = NSCalendar.current
         let comp = NSDateComponents()
         switch interval {
         case .Year:
@@ -245,7 +254,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             //        default:
             //            comp.day = 0
         }
-        return calendar.dateByAddingComponents(comp, toDate: date, options: [])!
+        //return calendar.dateByAddingComponents(comp, toDate: date, options: [])!
+        return calendar.date(byAdding: comp as DateComponents, to: date as Date, wrappingComponents: false)! as NSDate
     }
     
     // 2つの日時の間隔を整数型の値で返します
@@ -255,41 +265,44 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     //           date1よりdate2が前なら負の値を返します
     //
     func dateDiff(interval: Interval, date1: NSDate, date2: NSDate) -> Int {
-        let calendar = NSCalendar.currentCalendar()
+        /*
+        let calendar = NSCalendar.current
         switch interval {
         case .Year:
             let comp: NSDateComponents =
-            calendar.components(NSCalendarUnit.Year,
-                fromDate: date1, toDate: date2, options:[])
+                calendar.components(NSCalendarUnit.Year,
+                                    fromDate: date1, toDate: date2, options:[])
             return comp.year
         case .Month:
             let comp: NSDateComponents =
-            calendar.components(NSCalendarUnit.Month,
-                fromDate: date1, toDate: date2, options:[])
+                calendar.components(NSCalendarUnit.Month,
+                                    fromDate: date1, toDate: date2, options:[])
             return comp.month
         case .Day:
             let comp: NSDateComponents =
-            calendar.components(NSCalendarUnit.Day,
-                fromDate: date1, toDate: date2, options:[])
+                calendar.components(NSCalendarUnit.Day,
+                                    fromDate: date1, toDate: date2, options:[])
             return comp.day
         case .Hour:
             let comp: NSDateComponents =
-            calendar.components(NSCalendarUnit.Hour,
-                fromDate: date1, toDate: date2, options:[])
+                calendar.components(NSCalendarUnit.Hour,
+                                    fromDate: date1, toDate: date2, options:[])
             return comp.hour
         case .Minute:
             let comp: NSDateComponents =
-            calendar.components(NSCalendarUnit.Minute,
-                fromDate: date1, toDate: date2, options:[])
+                calendar.components(NSCalendarUnit.Minute,
+                                    fromDate: date1, toDate: date2, options:[])
             return comp.minute
         case .Second:
             let comp: NSDateComponents =
-            calendar.components(NSCalendarUnit.Second,
-                fromDate: date1, toDate: date2, options:[])
+                calendar.components(NSCalendarUnit.Second,
+                                    fromDate: date1, toDate: date2, options:[])
             return comp.second
             //        default:
             //            return 0
         }
+        */
+        return 0
     }
     
     // MARK: - Update Scheduling
@@ -307,7 +320,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
     // MARK: - Placeholder Templates
     
     func getPlaceholderTemplateForComplication(complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
-        if (complication.family == .ModularLarge) {
+        if (complication.family == .modularLarge) {
             let templateML = CLKComplicationTemplateModularLargeStandardBody()
             
             templateML.headerTextProvider = CLKSimpleTextProvider(text: "LD Timer")
@@ -316,31 +329,31 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
             
             handler(templateML)
         }
-        else if (complication.family == .ModularSmall) {
+        else if (complication.family == .modularSmall) {
             let templateMS = CLKComplicationTemplateModularSmallRingText()
             
             templateMS.textProvider = CLKSimpleTextProvider(text: "SET")
-            templateMS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
+            templateMS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.closed.rawValue)!
             templateMS.fillFraction = 0.5 as Float
             
             handler(templateMS)
         }
-        else if (complication.family == .CircularSmall) {
+        else if (complication.family == .circularSmall) {
             let templateCS = CLKComplicationTemplateCircularSmallRingText()
             
             templateCS.textProvider = CLKSimpleTextProvider(text: "SET")
-            templateCS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
+            templateCS.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.closed.rawValue)!
             templateCS.fillFraction = 0.5 as Float
             
             handler(templateCS)
         }
-        else if (complication.family == .UtilitarianLarge) {
+        else if (complication.family == .utilitarianLarge) {
             let templateUL = CLKComplicationTemplateUtilitarianLargeFlat()
             templateUL.textProvider = CLKSimpleTextProvider(text: "SET")
             
             handler(templateUL)
         }
-        else if (complication.family == .UtilitarianSmall) {
+        else if (complication.family == .utilitarianSmall) {
             let templateUS = CLKComplicationTemplateUtilitarianSmallFlat()            
             templateUS.textProvider = CLKSimpleTextProvider(text: "SET")
             
@@ -358,7 +371,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         template.body1TextProvider = CLKSimpleTextProvider(text: body1Text)
         template.body2TextProvider = CLKSimpleTextProvider(text: "〜" + body2Text)
         
-        let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        let entry = CLKComplicationTimelineEntry(date: date as Date, complicationTemplate: template)
         
         return(entry)
     }
@@ -367,10 +380,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         let template = CLKComplicationTemplateModularSmallRingText()
         
         template.textProvider = CLKSimpleTextProvider(text: bodyText)
-        template.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
+        template.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.closed.rawValue)!
         template.fillFraction = fraction
         
-        let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        let entry = CLKComplicationTimelineEntry(date: date as Date, complicationTemplate: template)
         
         return(entry)
     }
@@ -379,10 +392,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         let template = CLKComplicationTemplateCircularSmallRingText()
         
         template.textProvider = CLKSimpleTextProvider(text: bodyText)
-        template.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.Closed.rawValue)!
+        template.ringStyle = CLKComplicationRingStyle(rawValue: CLKComplicationRingStyle.closed.rawValue)!
         template.fillFraction = fraction
         
-        let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        let entry = CLKComplicationTimelineEntry(date: date as Date, complicationTemplate: template)
         
         return(entry)
     }
@@ -391,7 +404,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         let template = CLKComplicationTemplateUtilitarianLargeFlat()
         template.textProvider = CLKSimpleTextProvider(text: bodyText)
         
-        let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        let entry = CLKComplicationTimelineEntry(date: date as Date, complicationTemplate: template)
         
         return(entry)
     }
@@ -400,7 +413,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource, WKExtensionDe
         let template = CLKComplicationTemplateUtilitarianSmallFlat()
         template.textProvider = CLKSimpleTextProvider(text: bodyText)
         
-        let entry = CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        let entry = CLKComplicationTimelineEntry(date: date as Date, complicationTemplate: template)
         
         return(entry)
     }

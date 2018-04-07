@@ -38,15 +38,20 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
     let PREV: String = "Previous"
     let TIMEOVER: String = "Time Over..."
     
+    /*
     override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+        super.awake(withContext: context)
         // Configure interface objects here.
+    }
+    */
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
     }
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        loadData(0)
+        loadData(pageNo: 0)
     }
     
     override func didDeactivate() {
@@ -56,18 +61,18 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
     
     @IBAction func reload() {
         self.errLbl.setText("Now Loading...")
-        loadData(0)
+        loadData(pageNo: 0)
     }
     
     func loadData(pageNo: Int) {
-        if (WCSession.defaultSession().reachable) {
+        if (WCSession.default.isReachable) {
             let contents = ["val" : pageNo]
-            let session = WCSession.defaultSession()
+            let session = WCSession.default
             
             session.sendMessage(contents, replyHandler: { (replyMessage) -> Void in
                 // タイマーリストを取得する
-                let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
-                delegate.timerlist = replyMessage
+                let delegate: ExtensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+                delegate.timerlist = replyMessage as [String : AnyObject]
                 
                 self.setData()
                 }) { (error) -> Void in
@@ -78,8 +83,8 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
     
     func setData() {
         // タイマーリストを取得する
-        let delegate: ExtensionDelegate = WKExtension.sharedExtension().delegate as! ExtensionDelegate
-        var timer: [String : AnyObject] = delegate.timerlist
+        let delegate: ExtensionDelegate = WKExtension.shared().delegate as! ExtensionDelegate
+        var timer: [String : AnyObject] = delegate.timerlist as [String : AnyObject]
         
         // タイマーリストがあるかどうかを判定する        
         if (timer["nodata"] as! Bool) {
@@ -96,21 +101,21 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
             
             // 当日
             if (countDownState == self.TODAY) {
-                self.countDownLbl.setTextColor(UIColor.redColor())
+                self.countDownLbl.setTextColor(UIColor.red)
                 self.countDownLbl.setText(countDownState)
             }
             // 開始日前
             else if (countDownState == self.PREV) {
-                self.countDownLbl.setTextColor(UIColor.greenColor())
+                self.countDownLbl.setTextColor(UIColor.green)
                 self.countDownLbl.setText(countDownState)
             }
             // 過日
             else if (countDownState == self.TIMEOVER) {
-                self.countDownLbl.setTextColor(UIColor.grayColor())
+                self.countDownLbl.setTextColor(UIColor.gray)
                 self.countDownLbl.setText(countDownState)
             }
             else {
-                self.countDownLbl.setTextColor(UIColor.greenColor())
+                self.countDownLbl.setTextColor(UIColor.green)
                 self.countDownLbl.setText(countDownNumStr + countDownState)
             }
             
@@ -124,8 +129,8 @@ class TimerListController : WKInterfaceController, WCSessionDelegate, WKExtensio
     
     func updateComplication() {
         let server: CLKComplicationServer = CLKComplicationServer.sharedInstance()
-        for var complication: CLKComplication in server.activeComplications {
-            server.reloadTimelineForComplication(complication)
+        for complication: CLKComplication in server.activeComplications! {
+            server.reloadTimeline(for: complication)
         }
     }
 }

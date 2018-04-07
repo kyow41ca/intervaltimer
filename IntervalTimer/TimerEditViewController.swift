@@ -46,15 +46,15 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
             self.navigationItem.title = NSLocalizedString("editViewNaviAdd", comment: "")
             
             // FromとToのラベルのデフォルト（本日）を設定する
-            fromLabel.text = format(NSDate(), style: "yyyy/MM/dd")
-            toLabel.text = format(NSDate(), style: "yyyy/MM/dd")
+            fromLabel.text = format(date: NSDate(), style: "yyyy/MM/dd")
+            toLabel.text = format(date: NSDate(), style: "yyyy/MM/dd")
             
             // 通知時刻のデフォルト（12:00）を設定する
             let comp = NSDateComponents()
             comp.hour = 12
             comp.minute = 0
-            notifyTimeLabel.text = format(NSCalendar.currentCalendar().dateFromComponents(comp)!, style: "HH:mm")
-            notifyTimePicker.date = NSCalendar.currentCalendar().dateFromComponents(comp)!
+            //notifyTimeLabel.text = format(date: comp.date! as NSDate, style: "HH:mm")
+            //notifyTimePicker.date = (comp.date! as NSDate) as Date
         }
         // リストからもらった編集データがNULLでない場合＝編集
         else {
@@ -62,30 +62,30 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
             self.navigationItem.title = NSLocalizedString("editViewNaviEdit", comment: "")
             
             // 取得したタイトルをセットする
-            titleField.text = editData.valueForKeyPath("title") as? String
+            titleField.text = editData.value(forKeyPath: "title") as? String
             
             // 取得したFromとtoをセットする
-            var fromDate: NSDate = editData.valueForKeyPath("from") as! NSDate
-            var toDate: NSDate = editData.valueForKeyPath("to") as! NSDate
+            var fromDate: NSDate = editData.value(forKeyPath: "from") as! NSDate
+            var toDate: NSDate = editData.value(forKeyPath: "to") as! NSDate
 
             // タイマーが時間切れなら新しい日付をセットしなおす
             // （期限切れの日にfrom、期限切れの日から前の設定日時のfrom-toの日数が経過した日にtoをセットしておく）
-            if (-1 == Utility.dateCompare(NSDate(), date2: toDate)) {
-                let interval = Utility.dateDiff(Utility.Interval.Day, date1: fromDate, date2: toDate)
-                fromDate = Utility.dateAdd(Utility.Interval.Day, number: interval, date: fromDate)
-                toDate = Utility.dateAdd(Utility.Interval.Day, number: interval, date: toDate)
+            if (-1 == Utility.dateCompare(date1: NSDate(), date2: toDate)) {
+                let interval = Utility.dateDiff(interval: Utility.Interval.Day, date1: fromDate, date2: toDate)
+                fromDate = Utility.dateAdd(interval: Utility.Interval.Day, number: interval, date: fromDate)
+                toDate = Utility.dateAdd(interval: Utility.Interval.Day, number: interval, date: toDate)
             }
             
-            fromLabel.text = format(fromDate, style: "yyyy/MM/dd")
-            fromPicker.setDate(fromDate, animated: false)
+            fromLabel.text = format(date: fromDate, style: "yyyy/MM/dd")
+            fromPicker.setDate(fromDate as Date, animated: false)
 
-            toLabel.text = format(toDate, style: "yyyy/MM/dd")
-            toPicker.setDate(toDate, animated: false)
+            toLabel.text = format(date: toDate, style: "yyyy/MM/dd")
+            toPicker.setDate(toDate as Date, animated: false)
             
             // 取得した通知時刻をセットする
-            let notifyDate: NSDate = editData.valueForKeyPath("notify") as! NSDate
-            notifyTimeLabel.text = format(notifyDate, style: "HH:mm")
-            notifyTimePicker.setDate(notifyDate, animated: false)
+            let notifyDate: NSDate = editData.value(forKeyPath: "notify") as! NSDate
+            notifyTimeLabel.text = format(date: notifyDate, style: "HH:mm")
+            notifyTimePicker.setDate(notifyDate as Date, animated: false)
             
             // 取得したくり返しフラグをセットする
             //repeatsSwitch.on = editData.valueForKeyPath("repeats") as! Bool
@@ -96,7 +96,7 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Fromのセルが選択されたら
         if (indexPath.section == 0 && indexPath.row == 1) {
             fromDatePicker()
@@ -111,28 +111,28 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         }
         
         // セルの選択状態を解除する
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     var fromPickerHidden = true;
     var toPickerHidden = true;
     var notifyTimePickerHidden = true;
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Fromデートピッカーのセルを閉じる
         if (fromPickerHidden && indexPath.section == 0 && indexPath.row == 2) {
             return 0
         }
-        // Toデートピッカーのセルを閉じる
+            // Toデートピッカーのセルを閉じる
         else if (toPickerHidden && indexPath.section == 0 && indexPath.row == 4) {
             return 0
         }
-        // 通知時刻のデートピッカーのセルを閉じる
+            // 通知時刻のデートピッカーのセルを閉じる
         else if (notifyTimePickerHidden && indexPath.section == 1 && indexPath.row == 1) {
             return 0
         }
         
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     // Fromデートピッカー選択時処理
@@ -169,34 +169,34 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
     }
     
     // 開始日デートピッカー値変更時処理
-    @IBAction func fromChanged(sender: UIDatePicker) {
-        fromLabel.text = format(fromPicker.date, style: "yyyy/MM/dd")
+    @IBAction func fromChanged(_ sender: UIDatePicker) {
+        fromLabel.text = format(date: fromPicker.date as NSDate, style: "yyyy/MM/dd")
         
         // 開始日の最低日付を更新する
         toPicker.minimumDate = fromPicker.date
         
         // 開始日と終了日の差がマイナスなら
-        if (0 > toPicker.date.timeIntervalSinceDate(fromPicker.date)) {
+        if (0 > toPicker.date.timeIntervalSince(fromPicker.date)) {
             // 終了日ラベルを開始日と同様にする（デートピッカーは自動的に書き換わる）
-            toLabel.text = format(fromPicker.date, style: "yyyy/MM/dd")
+            toLabel.text = format(date: fromPicker.date as NSDate, style: "yyyy/MM/dd")
         }
     }
     
     // 終了日デートピッカー値変更時処理
-    @IBAction func toChanged(sender: UIDatePicker) {
-        toLabel.text = format(toPicker.date, style: "yyyy/MM/dd")
+    @IBAction func toChanged(_ sender: UIDatePicker) {
+        toLabel.text = format(date: toPicker.date as NSDate, style: "yyyy/MM/dd")
         
         // 開始日の最低日付を更新する
         toPicker.minimumDate = fromPicker.date
     }
     
     // 通知時刻デートピッカー変更時処理
-    @IBAction func notifyChanged(sender: AnyObject) {
-        notifyTimeLabel.text = format(notifyTimePicker.date, style: "HH:mm")
+    @IBAction func notifyChanged(_ sender: AnyObject) {
+        notifyTimeLabel.text = format(date: notifyTimePicker.date as NSDate, style: "HH:mm")
     }
     
     // 保存ボタン押下時処理
-    @IBAction func save(sender: AnyObject) {
+    @IBAction func save(_ sender: AnyObject) {
         // 編集データがない＝新規登録
         if (editData == nil) {
             createSaveData()
@@ -210,37 +210,37 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         let alertController = UIAlertController(
             title: NSLocalizedString("editViewSaveDialogTitle", comment: ""),
             message: NSLocalizedString("editViewSaveDialogMessage", comment: ""),
-            preferredStyle: .Alert
+            preferredStyle: .alert
         )
         
         // OKボタンの設定（押した時にモーダルを閉じる）
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in self.closeModalDialog() }))
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.closeModalDialog() }))
         
         // ダイアログを画面に表示する
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     // キャンセルボタン押下時処理
-    @IBAction func closeModalDialog(sender: UIBarButtonItem) {
+    @IBAction func closeModalDialog(_ sender: UIBarButtonItem) {
         closeModalDialog()
     }
     
     // モーダルを閉じる
     func closeModalDialog() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // キーボードを閉じる
-    func textFieldShouldReturn(textField: UITextField) -> Bool{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         textField.resignFirstResponder()
         return true
     }
     
     // NSDateをStringに変換する
     func format(date : NSDate, style : String) -> String {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = style
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date as Date)
     }
     
     // 新規データをCoreDataにインサートする
@@ -248,15 +248,15 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         // CoreData呼び出し
         //let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let timerContext: NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
-        let timerEntity: NSEntityDescription! = NSEntityDescription.entityForName("TimerEntity", inManagedObjectContext: timerContext)
+        let timerEntity: NSEntityDescription! = NSEntityDescription.entity(forEntityName: "TimerEntity", in: timerContext)
         
         // 画面から取得したデータで挿入する
-        let newData = IntervalTimer.TimerEntity(entity: timerEntity!, insertIntoManagedObjectContext: timerContext)
-        newData.id = NSUUID().UUIDString
+        let newData = IntervalTimer.TimerEntity(entity: timerEntity!, insertInto: timerContext)
+        newData.id = NSUUID().uuidString
         newData.title = titleField.text!.isEmpty ? "New Timer" : titleField.text
-        newData.from = Utility.cutTime(fromPicker.date)
-        newData.to = Utility.cutTime(toPicker.date)
-        newData.notify = Utility.createNotifyTime(newData.to!, notifyDate: notifyTimePicker.date)
+        newData.from = Utility.cutTime(date: fromPicker.date as NSDate)
+        newData.to = Utility.cutTime(date: toPicker.date as NSDate)
+        newData.notify = Utility.createNotifyTime(toDate: newData.to!, notifyDate: notifyTimePicker.date as NSDate)
         //newData.repeats = repeatsSwitch.on
         newData.repeats = false // 繰り返し機能はつけないが、カラムは残しておくためすべてfalseにしておく
         
@@ -267,8 +267,8 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         }
         
         // 通知時刻を過ぎていない場合だけ、通知センターに登録する
-        if (0 < newData.notify!.timeIntervalSinceDate(NSDate())) {
-            NotifyUtils.addNotifycation(newData)
+        if (0 < newData.notify!.timeIntervalSince(NSDate() as Date)) {
+            NotifyUtils.addNotifycation(data: newData)
         }
     }
     
@@ -277,19 +277,19 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         // CoreData呼び出し
         //let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let timerContext: NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
-        let timerEntity = NSEntityDescription.entityForName("TimerEntity", inManagedObjectContext: timerContext);
+        let timerEntity = NSEntityDescription.entity(forEntityName: "TimerEntity", in: timerContext);
         
         // NSFetchRequest SQLのSelect文のようなイメージ
-        let fetchRequest = NSFetchRequest();
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>();
         fetchRequest.entity = timerEntity;
         
         // NSPredicate SQLのWhere句のようなイメージ
-        let predicate = NSPredicate(format: "%K = %@", "id", (editData.valueForKeyPath("id") as? String)!)
+        let predicate = NSPredicate(format: "%K = %@", "id", (editData.value(forKeyPath: "id") as? String)!)
         fetchRequest.predicate = predicate
         
         do {
             // SELECTを実行して結果を取得する
-            let results = try timerContext.executeFetchRequest(fetchRequest)
+            let results = try timerContext.fetch(fetchRequest)
             
             // 画面から取得したデータで更新する
             for managedObject in results {
@@ -297,18 +297,18 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
                 
                 // レコードの更新処理
                 editData.title = titleField.text!.isEmpty ? "New Timer" : titleField.text
-                editData.from = Utility.cutTime(fromPicker.date)
-                editData.to = Utility.cutTime(toPicker.date)
-                editData.notify = Utility.createNotifyTime(editData.to!, notifyDate: notifyTimePicker.date)
+                editData.from = Utility.cutTime(date: fromPicker.date as NSDate)
+                editData.to = Utility.cutTime(date: toPicker.date as NSDate)
+                editData.notify = Utility.createNotifyTime(toDate: editData.to!, notifyDate: notifyTimePicker.date as NSDate)
                 //newData.repeats = repeatsSwitch.on
                 editData.repeats = false // 繰り返し機能はつけないが、カラムは残しておくためすべてfalseにしておく
                 
                 // もともとの通知センターをキャンセルする
-                NotifyUtils.cancelNotifycation(editData.id!)
+                NotifyUtils.cancelNotifycation(notifyId: editData.id!)
                 
                 // 通知時刻を過ぎていない場合だけ、通知センターに登録する
-                if (0 < editData.notify!.timeIntervalSinceDate(NSDate())) {
-                    NotifyUtils.addNotifycation(editData)
+                if (0 < editData.notify!.timeIntervalSince(NSDate() as Date)) {
+                    NotifyUtils.addNotifycation(data: editData)
                 }
             }
         } catch let error as NSError {
@@ -316,6 +316,6 @@ class TimerEditViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
     }
 }

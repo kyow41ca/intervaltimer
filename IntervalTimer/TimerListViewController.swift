@@ -24,11 +24,8 @@ class TimerListViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        
-        // iAd(バナー)の自動表示
-        self.canDisplayBannerAds = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,7 +33,7 @@ class TimerListViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         // セル選択時の編集データが残っていたらNULL参照する
         // ※一回編集した時に「＋」ボタンを押下すると、セグエがその情報を持って行ってしまうため
         if (editData != nil) {
@@ -46,20 +43,20 @@ class TimerListViewController: UITableViewController {
         // CoreData呼び出し
         //let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
-        let freg = NSFetchRequest(entityName: "TimerEntity")
+        let freg = NSFetchRequest<NSFetchRequestResult>(entityName: "TimerEntity")
         freg.sortDescriptors = [NSSortDescriptor(key: "to", ascending: true)]
         
         // セルのデータを全行読み込む
         do {
-            timerlist = try context.executeFetchRequest(freg)
+            timerlist = try context.fetch(freg) as Array<AnyObject>
         } catch let error as NSError {
             print(error)
         }
         
         // データをセットする
         timerLists = []
-        for (var i: Int = 0; i < timerlist.count; i++) {
-            setTimerListData(Utility.rowDataFormat(timerlist[i] as! NSManagedObject))
+        for timer in timerlist {
+            setTimerListData(rowData: Utility.rowDataFormat(data: timer as! NSManagedObject))
         }
         
         // テーブルビューを再読込みする
@@ -67,9 +64,9 @@ class TimerListViewController: UITableViewController {
     }
     
     // 編集ボタン押下時処理
-    @IBAction func tapEdit(sender: AnyObject) {
+    @IBAction func tapEdit(_ sender: AnyObject) {
         // 今編集モードなら、編集モードを解除する
-        if editing {
+        if isEditing {
             super.setEditing(false, animated: true)
             tableView.setEditing(false, animated: true)
         }
@@ -80,41 +77,41 @@ class TimerListViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         // CoreData呼び出し
         //let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context : NSManagedObjectContext = DataAccess.sharedInstance.managedObjectContext
         
         // 編集モードの時に選択された行のインデックスを取得して、その行のデータを削除する
-        if editingStyle == .Delete {
+        if editingStyle == .delete {
             // idを取得しておく
             let notifyId = timerLists[indexPath.row].id
             
             // 削除する
-            context.deleteObject(timerlist[indexPath.row] as! NSManagedObject)
-            timerlist.removeAtIndex(indexPath.row)
-            timerLists.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            context.delete(timerlist[indexPath.row] as! NSManagedObject)
+            timerlist.remove(at: indexPath.row)
+            timerLists.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
             
             // 通知センターもキャンセルする
-            NotifyUtils.cancelNotifycation(notifyId)
+            NotifyUtils.cancelNotifycation(notifyId: notifyId)
         }
-        // インサートモード？
-        else if editingStyle == .Insert {
+            // インサートモード？
+        else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
     // セルの行数を指定
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timerLists.count
     }
     
     // セルの値を設定
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルの情報を取得する
-        let cell: TimerListCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! TimerListCell
-        cell.setCell(timerLists[indexPath.row])
+        let cell: TimerListCell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TimerListCell
+        cell.setCell(timerlist: timerLists[indexPath.row])
         
         return cell
     }
@@ -137,7 +134,7 @@ class TimerListViewController: UITableViewController {
         
         // 残日数
         var day: String = ""
-        var dayColor: UIColor = Utility.UIColorFromRGB(0x008782)
+        var dayColor: UIColor = Utility.UIColorFromRGB(rgbValue: 0x008782)
         
         let countDownNumStr: String = (rowData[Utility.COUNTDOWN_NUM_STR] as? String)!
         let countDownState: String = (rowData[Utility.COUNTDOWN_STATE] as? String)!
@@ -145,21 +142,21 @@ class TimerListViewController: UITableViewController {
         // 当日
         if (countDownState == Utility.TODAY) {
             day = countDownState
-            dayColor = UIColor.redColor()
+            dayColor = UIColor.red
         }
         // 開始日前
         else if (countDownState == Utility.PREV) {
             day = countDownState
-            dayColor = Utility.UIColorFromRGB(0x008782)
+            dayColor = Utility.UIColorFromRGB(rgbValue: 0x008782)
         }
         // 過日
         else if (countDownState == Utility.TIMEOVER) {
             day = countDownState
-            dayColor = UIColor.grayColor()
+            dayColor = UIColor.gray
         }
         else {
             day = countDownNumStr + countDownState
-            dayColor = Utility.UIColorFromRGB(0x008782)
+            dayColor = Utility.UIColorFromRGB(rgbValue: 0x008782)
         }
 
         let timer = TimerList(id: id, title: title, day: day, dayColor: dayColor, from: from, to: to, percent: percent)
@@ -167,31 +164,30 @@ class TimerListViewController: UITableViewController {
         timerLists.append(timer)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 押されたセルの編集データを取得する
         editData = timerlist[indexPath.row] as! NSManagedObject
         
         // 編集画面に遷移するためのセグエを取得する
-        performSegueWithIdentifier("toTimerEditView", sender: nil)
+        performSegue(withIdentifier: "toTimerEditView", sender: nil)
         
         // セルの選択状態（タップした時の背景灰色）を解除する
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    // Segue 準備
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // セグエを特定する
         if (segue.identifier == "toTimerEditView") {
             // 編集データを編集画面に渡す
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             let editVc = navigationController.viewControllers[0] as! TimerEditViewController
             editVc.editData = editData
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         // 画面遷移時に編集モードだった場合には編集モードを解除する
-        if editing {
+        if isEditing {
             super.setEditing(false, animated: true)
             tableView.setEditing(false, animated: true)
         }

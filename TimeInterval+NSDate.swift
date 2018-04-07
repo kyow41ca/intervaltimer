@@ -10,7 +10,7 @@ import Foundation
 
 extension NSDate {
     func stringForTimeIntervalSinceCreated() -> String {
-        return stringForTimeIntervalSinceCreated(NSDate(), isDayPrint: true)
+        return stringForTimeIntervalSinceCreated(nowDate: NSDate(), isDayPrint: true)
     }
     
     func stringForTimeIntervalSinceCreated(nowDate: NSDate, isDayPrint: Bool) -> String {
@@ -19,7 +19,7 @@ extension NSDate {
         let dayPrint: String = isDayPrint ? " days" : ""
         var DayInterval  :Int = 0
         var DayModules   :Int = 0
-        let interval = abs(Int(self.timeIntervalSinceDate(nowDate)))
+        let interval = abs(Int(self.timeIntervalSince(nowDate as Date)))
         if (interval >= 86400) {
             DayInterval = interval/86400
             DayModules = interval%86400
@@ -60,19 +60,19 @@ extension NSDate {
 }
 
 extension NSDate {
-    func toString(format format:String) -> String? {
-        let formatter = NSDateFormatter()
+    func toString(format:String) -> String? {
+        let formatter = DateFormatter()
         formatter.dateFormat = format
-        let dateStr = formatter.stringFromDate(self)
+        let dateStr = formatter.string(from: self as Date)
         return dateStr
     }
 }
 
 extension String {
-    func toDate(format format:String) -> NSDate? {
-        let formatter = NSDateFormatter()
+    func toDate(format:String) -> NSDate? {
+        let formatter = DateFormatter()
         formatter.dateFormat = format
-        let date = formatter.dateFromString(self)
-        return date
+        let date = formatter.date(from: self)
+        return date! as NSDate
     }
 }

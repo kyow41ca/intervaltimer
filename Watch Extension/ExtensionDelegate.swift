@@ -10,12 +10,16 @@ import WatchKit
 import WatchConnectivity
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
-    
-    var timerlist: [String : AnyObject] = ["nodata" : true]
-    
-    let wcSession = WCSession.defaultSession()
-    var timer: NSTimer = NSTimer()
 
+    var timerlist: [String : AnyObject] = ["nodata" : true as AnyObject]
+    
+    let wcSession = WCSession.default
+    var timer: Timer = Timer()
+
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
     func applicationDidFinishLaunching() {
         
     }
@@ -23,9 +27,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     func applicationDidBecomeActive() {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         if (WCSession.isSupported()) {
-            let session = WCSession.defaultSession()
+            let session = WCSession.default
             session.delegate = self;
-            session.activateSession()
+            session.activate()
         }
     }
 
@@ -35,17 +39,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     }
     
     func loadData() {
-        if (wcSession.reachable) {
-            let contents = ["val" : 0]
+        if (wcSession.isReachable) {
+            let _: [String : Any] = ["val" : 0 as Any]
             
+            /*
             wcSession.sendMessage(contents, replyHandler: { (replyMessage) -> Void in
                 // タイマーリストを取得する
                 self.timerlist = replyMessage
-                }) { (error) -> Void in
-                    print(error)
+            }) { (error) -> Void in
+                print(error)
             }
+            */
         }
     }
-
-
 }

@@ -17,33 +17,29 @@ class SettingsController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        appVerLbl.text = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String
+        appVerLbl.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        
-        // iAd(バナー)の自動表示
-        self.canDisplayBannerAds = true
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Fromのセルが選択されたら
         if (indexPath.section == 0 && indexPath.row == 0) {
             // Apple Watch設定画面に遷移するためのセグエを取得する
-            performSegueWithIdentifier("toSettingAppleWatch", sender: nil)
+            performSegue(withIdentifier: "toSettingAppleWatch", sender: nil)
         }
         
         // セルの選択状態を解除する
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
     }
 }

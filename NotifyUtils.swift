@@ -8,30 +8,33 @@
 
 import UIKit
 import Foundation
+import UserNotifications
 
 class NotifyUtils {
     
     // 通知登録処理
     internal static func addNotifycation(data: TimerEntity) {
-        let notification = UILocalNotification()
-        notification.fireDate = data.notify
-        notification.timeZone = NSTimeZone.defaultTimeZone()
-        notification.alertBody = data.title!
-        notification.alertAction = "OK"
-        notification.soundName = UILocalNotificationDefaultSoundName
-        notification.userInfo = ["notifyId" : data.id!]
+        let content = UNMutableNotificationContent()
+        content.body = data.title!;
+        content.sound = UNNotificationSound.default()
+        content.userInfo = ["notifyId" : data.id!]
         
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "notifyId", content: content, trigger: trigger)
+        
+        let center = UNUserNotificationCenter.current()
+        center.add(request, withCompletionHandler: { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        })
     }
     
     // 通知キャンセル処理
     internal static func cancelNotifycation(notifyId: String) {
-        for notification: UILocalNotification in UIApplication.sharedApplication().scheduledLocalNotifications! {
-            if (notifyId == notification.userInfo!["notifyId"] as! String) {
-                UIApplication.sharedApplication().cancelLocalNotification(notification)
-                //break
-            }
-        }
+        let center = UNUserNotificationCenter.current()
+        center.removeDeliveredNotifications(withIdentifiers: [notifyId])
     }
     
 }
